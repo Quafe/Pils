@@ -1,4 +1,4 @@
-CombatMapper
-============
+furry-ironman
+=============
 
-CombatMapper
+Java + Spaceships + bugfree source code
