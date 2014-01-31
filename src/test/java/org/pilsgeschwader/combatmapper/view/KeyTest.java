@@ -19,7 +19,7 @@ import org.pilsgeschwader.furryironman.controller.common.XMLApiRequest;
 
 /**
  *
- * @author boreas
+ * @author binarygamura
  */
 public class KeyTest
 {

@@ -4,7 +4,7 @@ import java.util.Map;
 
 /**
  *
- * @author boreas
+ * @author binarygamura
  */
 public interface XMLApiResponseHandler
 {

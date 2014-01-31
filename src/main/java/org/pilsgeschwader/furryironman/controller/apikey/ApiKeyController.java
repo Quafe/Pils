@@ -22,7 +22,7 @@ import org.xml.sax.SAXException;
 
 /**
  *
- * @author boreas
+ * @author binarygamura
  */
 public class ApiKeyController extends AbstractController
 {
@@ -86,9 +86,6 @@ public class ApiKeyController extends AbstractController
             validate(key);
         }
     }
-    
-    
-    
     
     private ApiKey loadLine(String line)
     {

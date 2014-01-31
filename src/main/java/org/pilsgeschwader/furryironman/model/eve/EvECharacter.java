@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * * <row name="Mary" characterID="150267069" corporationName="Starbase Anchoring Corp" corporationID="150279367" />
- * @author boreas
+ * @author binarygamura
  */
 public class EvECharacter
 {

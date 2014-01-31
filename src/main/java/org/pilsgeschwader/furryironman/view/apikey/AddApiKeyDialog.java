@@ -16,7 +16,7 @@ import org.xml.sax.SAXException;
 
 /**
  *
- * @author boreas
+ * @author binarygamura
  */
 public class AddApiKeyDialog extends AbstractDialog implements Runnable
 {

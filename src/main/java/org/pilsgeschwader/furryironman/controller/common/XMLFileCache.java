@@ -7,7 +7,7 @@ import java.io.InputStream;
 
 /**
  *
- * @author boreas
+ * @author binarygamura
  */
 public class XMLFileCache
 {

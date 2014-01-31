@@ -16,7 +16,7 @@ import org.xml.sax.helpers.DefaultHandler;
 
 /**
  *
- * @author boreas
+ * @author binarygamura
  */
 public class XMLApiResponseReader extends DefaultHandler
 {

@@ -17,7 +17,7 @@ import org.pilsgeschwader.furryironman.model.eve.EvECharacter;
 
 /**
  *
- * @author boreas
+ * @author binarygamura
  */
 public class EveCharacterRenderer extends JPanel implements ListCellRenderer<EvECharacter>
 {    

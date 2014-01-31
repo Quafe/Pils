@@ -3,16 +3,16 @@ package org.pilsgeschwader.furryironman.view.character;
 import java.awt.BorderLayout;
 import javax.swing.JTabbedPane;
 import org.pilsgeschwader.furryironman.model.eve.EvECharacter;
-import org.pilsgeschwader.furryironman.view.EvECombatMapper;
+import org.pilsgeschwader.furryironman.view.FurryIronman;
 import org.pilsgeschwader.furryironman.view.common.AbstractDialog;
 
 /**
  *
- * @author boreas
+ * @author binarygamura
  */
 public class CharacterInfo extends AbstractDialog
 {
-    public CharacterInfo(EvECharacter character, EvECombatMapper parent)
+    public CharacterInfo(EvECharacter character, FurryIronman parent)
     {
         super(character.getCharacterName(), parent);
         init();

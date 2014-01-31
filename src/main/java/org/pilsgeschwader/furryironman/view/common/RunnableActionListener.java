@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 /**
  *
- * @author boreas
+ * @author binarygamura
  */
 public class RunnableActionListener implements ActionListener
 {

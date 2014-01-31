@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author boreas
+ * @author binarygamura
  */
 public class ButtonPanel extends JPanel
 {

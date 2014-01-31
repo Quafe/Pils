@@ -5,7 +5,7 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author boreas
+ * @author binarygamura
  */
 public abstract class CharacterSheetDialogApp extends JPanel implements Runnable
 {

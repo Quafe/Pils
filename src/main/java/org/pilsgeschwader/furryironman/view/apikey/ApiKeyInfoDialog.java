@@ -7,13 +7,13 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import org.pilsgeschwader.furryironman.controller.common.XMLApiRequest;
 import org.pilsgeschwader.furryironman.model.eve.ApiKey;
-import org.pilsgeschwader.furryironman.view.EvECombatMapper;
+import org.pilsgeschwader.furryironman.view.FurryIronman;
 import org.pilsgeschwader.furryironman.view.common.AbstractDialog;
 import org.pilsgeschwader.furryironman.view.common.SimpleForm;
 
 /**
  *
- * @author boreas
+ * @author binarygamura
  */
 public class ApiKeyInfoDialog extends AbstractDialog implements Runnable
 {
@@ -46,7 +46,7 @@ public class ApiKeyInfoDialog extends AbstractDialog implements Runnable
     
     public void reload()
     {
-        EvECombatMapper.threadPool.execute(this);
+        FurryIronman.threadPool.execute(this);
     }
 
     @Override

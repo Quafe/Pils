@@ -11,7 +11,7 @@ import org.pilsgeschwader.furryironman.model.eve.EvEItemDefinition;
 
 /**
  *
- * @author boreas
+ * @author binarygamura
  */
 public class Model
 {

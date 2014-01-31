@@ -9,7 +9,7 @@ import javax.swing.ImageIcon;
 
 /**
  *
- * @author boreas
+ * @author binarygamura
  */
 public class IconCache
 {

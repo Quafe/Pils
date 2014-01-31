@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  *
- * @author boreas
+ * @author binarygamura
  */
 public class EvECharacterSheet
 {

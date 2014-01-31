@@ -10,7 +10,7 @@ import org.pilsgeschwader.furryironman.model.eve.EvECharacterStatus;
 
 /**
  *
- * @author boreas
+ * @author binarygamura
  */
 public class CharacterStatusHandler implements XMLApiResponseHandler
 {

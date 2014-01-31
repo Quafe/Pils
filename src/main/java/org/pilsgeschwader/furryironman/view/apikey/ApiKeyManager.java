@@ -10,22 +10,22 @@ import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
 import org.pilsgeschwader.furryironman.model.eve.ApiKey;
-import org.pilsgeschwader.furryironman.view.EvECombatMapper;
+import org.pilsgeschwader.furryironman.view.FurryIronman;
 import org.pilsgeschwader.furryironman.view.common.AbstractDialog;
 
 /**
  *
- * @author boreas
+ * @author binarygamura
  */
 public class ApiKeyManager extends AbstractDialog
 {
-    private final EvECombatMapper parentGUI;
+    private final FurryIronman parentGUI;
     
     private JList<ApiKey> keysList;
     
     private final AddApiKeyDialog addDialog;
     
-    public ApiKeyManager(EvECombatMapper parentGUI)
+    public ApiKeyManager(FurryIronman parentGUI)
     {
         super("manage api keys", parentGUI);
         this.parentGUI = parentGUI;
@@ -42,7 +42,7 @@ public class ApiKeyManager extends AbstractDialog
         init();
     }
 
-    public EvECombatMapper getParentGUI()
+    public FurryIronman getParentGUI()
     {
         return parentGUI;
     }

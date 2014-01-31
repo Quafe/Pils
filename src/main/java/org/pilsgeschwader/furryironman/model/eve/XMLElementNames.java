@@ -2,7 +2,7 @@ package org.pilsgeschwader.furryironman.model.eve;
 
 /**
  *
- * @author boreas
+ * @author binarygamura
  */
 public enum XMLElementNames
 {

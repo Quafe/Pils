@@ -26,7 +26,7 @@ package org.pilsgeschwader.furryironman.deprecated;
 //
 ///**
 // *
-// * @author boreas
+// * @author binarygamura
 // */
 //public class CharacterImageController extends AbstractController
 //{    

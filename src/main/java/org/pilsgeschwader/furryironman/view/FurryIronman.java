@@ -48,13 +48,13 @@ import org.xml.sax.SAXException;
  * 
  *
  */
-public class EvECombatMapper extends JFrame implements Runnable
+public class FurryIronman extends JFrame implements Runnable
 {
     private JProgressBar progressBar;
     
     private final Controller controller;
     
-    private static final Logger logger = Logger.getLogger(EvECombatMapper.class.getName());
+    private static final Logger logger = Logger.getLogger(FurryIronman.class.getName());
     
     public static final ExecutorService threadPool = Executors.newCachedThreadPool();
     
@@ -64,7 +64,7 @@ public class EvECombatMapper extends JFrame implements Runnable
     
     private ButtonPanel buttonPanel;
     
-    private EvECombatMapper() throws URISyntaxException
+    private FurryIronman() throws URISyntaxException
     {
         super("EveCombatMapper");
         setIconImage(IconCache.getIcon("74_64_13.png").getImage());
@@ -109,7 +109,7 @@ public class EvECombatMapper extends JFrame implements Runnable
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                apiKeyManager.setLocationRelativeTo(EvECombatMapper.this);
+                apiKeyManager.setLocationRelativeTo(FurryIronman.this);
                 apiKeyManager.setVisible(true);
             }
         });
@@ -124,7 +124,7 @@ public class EvECombatMapper extends JFrame implements Runnable
         setJMenuBar(menuBar);
     }
     
-    private EvECombatMapper init() throws IOException, ClassNotFoundException, SQLException, PropertyNotFoundException, URISyntaxException, ParserConfigurationException, SAXException, ControllerException
+    private FurryIronman init() throws IOException, ClassNotFoundException, SQLException, PropertyNotFoundException, URISyntaxException, ParserConfigurationException, SAXException, ControllerException
     {
         ApplicationConfig config = new ApplicationConfig();
         controller.init(config.load(new File("./config.properties")));
@@ -149,7 +149,7 @@ public class EvECombatMapper extends JFrame implements Runnable
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                threadPool.execute(EvECombatMapper.this);
+                threadPool.execute(FurryIronman.this);
             }
         });
         
@@ -166,7 +166,7 @@ public class EvECombatMapper extends JFrame implements Runnable
                 EvECharacter selected = allCharactersList.getSelectedValue();
                 if(selected != null)
                 {
-                    CharacterStatusDialog dialog = new CharacterStatusDialog(EvECombatMapper.this, selected);
+                    CharacterStatusDialog dialog = new CharacterStatusDialog(FurryIronman.this, selected);
                     dialog.setVisible(true);
                     threadPool.submit(dialog);
                 }
@@ -225,7 +225,7 @@ public class EvECombatMapper extends JFrame implements Runnable
         validate();
         pack();
         setLocationRelativeTo(null);
-        threadPool.execute(EvECombatMapper.this);
+        threadPool.execute(FurryIronman.this);
         return this;
     }
     
@@ -246,7 +246,7 @@ public class EvECombatMapper extends JFrame implements Runnable
                         JDialog.setDefaultLookAndFeelDecorated(true);
                     }
                     catch(ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ex){}
-                    new EvECombatMapper().init().setVisible(true);
+                    new FurryIronman().init().setVisible(true);
                 }
                 catch(PropertyNotFoundException ex)
                 {

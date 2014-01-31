@@ -7,7 +7,7 @@ package org.pilsgeschwader.furryironman.deprecated;
 //
 ///**
 // *
-// * @author boreas
+// * @author binarygamura
 // */
 //public enum EveAccessMask
 //{

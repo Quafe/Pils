@@ -10,7 +10,7 @@ import org.pilsgeschwader.furryironman.model.eve.ApiKey;
 
 /**
  *
- * @author boreas
+ * @author binarygamura
  */
 public class XMLApiRequest
 {    

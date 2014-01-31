@@ -2,7 +2,7 @@ package org.pilsgeschwader.furryironman.view.character;
 
 /**
  *
- * @author boreas
+ * @author binarygamura
  */
 public class CharacterSheetSkillsApp extends CharacterSheetDialogApp
 {

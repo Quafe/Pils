@@ -11,7 +11,7 @@ import javax.swing.JProgressBar;
 
 /**
  *
- * @author boreas
+ * @author binarygamura
  */
 public class AbstractDialog extends JDialog
 {

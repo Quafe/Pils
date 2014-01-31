@@ -4,7 +4,7 @@ import java.util.Date;
 
 /**
  *
- * @author boreas
+ * @author binarygamura
  */
 public class ApiKey
 {

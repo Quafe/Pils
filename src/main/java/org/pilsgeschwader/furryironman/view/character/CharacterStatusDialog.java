@@ -13,14 +13,14 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.pilsgeschwader.furryironman.controller.common.ControllerException;
 import org.pilsgeschwader.furryironman.model.eve.EvECharacter;
 import org.pilsgeschwader.furryironman.model.eve.EvECharacterStatus;
-import org.pilsgeschwader.furryironman.view.EvECombatMapper;
+import org.pilsgeschwader.furryironman.view.FurryIronman;
 import org.pilsgeschwader.furryironman.view.common.AbstractDialog;
 import org.pilsgeschwader.furryironman.view.common.SimpleForm;
 import org.xml.sax.SAXException;
 
 /**
  *
- * @author boreas
+ * @author binarygamura
  */
 public class CharacterStatusDialog extends AbstractDialog implements ActionListener, Runnable
 {
@@ -32,13 +32,13 @@ public class CharacterStatusDialog extends AbstractDialog implements ActionListe
     
     private JTextField createDateField;
     
-    private final EvECombatMapper parent;
+    private final FurryIronman parent;
     
     private final EvECharacter character;
     
     private final SimpleDateFormat dateFormat;
     
-    public CharacterStatusDialog(EvECombatMapper parent, EvECharacter character)
+    public CharacterStatusDialog(FurryIronman parent, EvECharacter character)
     {
         super(character.getCharacterName(), parent);
         setModal(false);
@@ -85,7 +85,7 @@ public class CharacterStatusDialog extends AbstractDialog implements ActionListe
     @Override
     public void actionPerformed(ActionEvent e)
     {
-        EvECombatMapper.threadPool.execute(this);
+        FurryIronman.threadPool.execute(this);
     }
 
     @Override

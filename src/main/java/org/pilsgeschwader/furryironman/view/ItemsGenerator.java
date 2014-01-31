@@ -17,7 +17,7 @@ import org.pilsgeschwader.furryironman.model.eve.SolarSystem;
 
 /**
  *
- * @author boreas
+ * @author binarygamura
  */
 public class ItemsGenerator
 {

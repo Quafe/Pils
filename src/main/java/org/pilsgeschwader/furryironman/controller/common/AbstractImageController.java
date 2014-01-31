@@ -22,7 +22,7 @@ import org.pilsgeschwader.furryironman.model.eve.EvECharacter;
 
 /**
  *
- * @author boreas
+ * @author binarygamura
  */
 public class AbstractImageController extends AbstractController
 {

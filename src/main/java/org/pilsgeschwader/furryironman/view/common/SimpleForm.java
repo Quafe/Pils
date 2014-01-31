@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author boreas
+ * @author binarygamura
  */
 public class SimpleForm extends JPanel
 {

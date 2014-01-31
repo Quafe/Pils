@@ -3,7 +3,7 @@ package org.pilsgeschwader.furryironman.controller.common;
 
 /**
  *
- * @author boreas
+ * @author binarygamura
  */
 public class PropertyNotFoundException extends Exception
 {

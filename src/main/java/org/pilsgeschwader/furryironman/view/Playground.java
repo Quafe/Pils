@@ -17,7 +17,7 @@ import org.pilsgeschwader.furryironman.model.app.ApplicationConfig;
 
 /**
  *
- * @author boreas
+ * @author binarygamura
  */
 public class Playground
 {

@@ -11,7 +11,7 @@ import org.pilsgeschwader.furryironman.controller.common.PropertyNotFoundExcepti
 
 /**
  *
- * @author boreas
+ * @author binarygamura
  */
 public class ApplicationConfig
 {

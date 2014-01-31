@@ -15,7 +15,7 @@ import org.pilsgeschwader.furryironman.model.eve.XMLElementNames;
 
 /**
  *
- * @author boreas
+ * @author binarygamura
  */
 public class CharacterSheetHandler implements XMLApiResponseHandler
 {
