@@ -2,13 +2,13 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.pilsgeschwader.combatmapper</groupId>
-    <artifactId>EveCombatMapper</artifactId>
+    <groupId>org.pilsgeschwader.furryironman</groupId>
+    <artifactId>furry-ironman</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <developers>
         <developer>
-            <name>Frederik Priede</name>
+            <name>Binary Gamura</name>
             <organization>Pilsgeschwader</organization>
             <roles>
                 <role>project master/developer</role>
@@ -16,7 +16,7 @@
         </developer>
     </developers>
 
-    <name>EveCombatMapper</name>
+    <name>FurryIronman</name>
     <url>http://maven.apache.org</url>
     <build>
         <plugins>

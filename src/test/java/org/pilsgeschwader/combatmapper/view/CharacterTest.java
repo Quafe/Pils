@@ -7,6 +7,7 @@
 package org.pilsgeschwader.combatmapper.view;
 
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.pilsgeschwader.furryironman.controller.character.CharacterController;
 import org.pilsgeschwader.furryironman.model.eve.ApiKey;
@@ -26,6 +27,7 @@ public class CharacterTest
     }
     
     @Test
+    @Ignore
     public void testCharacterSheet()
     {
         ApiKey key = new ApiKey(2656713,"j8webTIcKK8WD6gJOqw3EIah57HNBUEVCg5HbcEvzdKwW8uc4JaUz8bUHhsrFibR");

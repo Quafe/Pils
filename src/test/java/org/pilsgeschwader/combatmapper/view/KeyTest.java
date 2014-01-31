@@ -14,6 +14,7 @@ import org.pilsgeschwader.furryironman.model.eve.ApiKey;
 import org.xml.sax.SAXException;
 
 import static org.junit.Assert.*;
+import org.junit.Ignore;
 import org.pilsgeschwader.furryironman.controller.common.XMLApiRequest;
 
 /**
@@ -34,6 +35,7 @@ public class KeyTest
     }
     
     @Test
+    @Ignore
     public void testApiKeyPermissions()
     {
         ApiKey key = new ApiKey();
@@ -60,6 +62,7 @@ public class KeyTest
     }
     
     @Test
+    @Ignore
     public void testParseValidApiKeyInfo() throws IOException, ControllerException, ParserConfigurationException, SAXException, URISyntaxException
     {
         long start = System.currentTimeMillis();
