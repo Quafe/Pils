@@ -8,8 +8,8 @@ package org.pilsgeschwader.combatmapper.view;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.pilsgeschwader.combatmapper.controller.character.CharacterController;
-import org.pilsgeschwader.combatmapper.model.eve.ApiKey;
+import org.pilsgeschwader.furryironman.controller.character.CharacterController;
+import org.pilsgeschwader.furryironman.model.eve.ApiKey;
 
 /**
  *

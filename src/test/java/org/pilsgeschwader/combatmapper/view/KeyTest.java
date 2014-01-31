@@ -8,13 +8,13 @@ import java.util.List;
 import javax.xml.parsers.ParserConfigurationException;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.pilsgeschwader.combatmapper.controller.apikey.ApiKeyController;
-import org.pilsgeschwader.combatmapper.controller.common.ControllerException;
-import org.pilsgeschwader.combatmapper.model.eve.ApiKey;
+import org.pilsgeschwader.furryironman.controller.apikey.ApiKeyController;
+import org.pilsgeschwader.furryironman.controller.common.ControllerException;
+import org.pilsgeschwader.furryironman.model.eve.ApiKey;
 import org.xml.sax.SAXException;
 
 import static org.junit.Assert.*;
-import org.pilsgeschwader.combatmapper.controller.common.XMLApiRequest;
+import org.pilsgeschwader.furryironman.controller.common.XMLApiRequest;
 
 /**
  *
