@@ -14,6 +14,13 @@
                 <role>project master/developer</role>
             </roles>
         </developer>
+        <developer>
+            <name>Jakob</name>
+            <organization>Quick and Dirty Labs</organization>
+            <roles>
+                <role>Java Newbie</role>
+            </roles>
+        </developer>
     </developers>
 
     <name>FurryIronman</name>
