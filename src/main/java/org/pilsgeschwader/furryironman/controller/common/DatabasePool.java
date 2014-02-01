@@ -18,7 +18,10 @@ import org.apache.commons.pool.impl.GenericObjectPool;
 import org.pilsgeschwader.furryironman.model.app.ApplicationConfig;
 
 /**
- *
+ * simple convinience wrapper for the apache database connection
+ * pool. this class is not used by the application itself, its usage
+ * is limited to the csv export tools.
+ * 
  * @author binarygamura
  */
 public class DatabasePool

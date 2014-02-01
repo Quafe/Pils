@@ -1,6 +1,4 @@
-/**
- * 
- */
+package org.pilsgeschwader.furryironman.deprecated;
 
 /**
  * @author stone
@@ -13,7 +11,7 @@ public class MAIN {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		System.out.println("Mettbällchen");
+		System.out.println("Mettbällchen Direktsaft");
 
 	}
 

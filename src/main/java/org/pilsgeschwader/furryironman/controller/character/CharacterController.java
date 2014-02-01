@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -13,6 +14,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.pilsgeschwader.furryironman.controller.common.AbstractController;
 import org.pilsgeschwader.furryironman.controller.common.Controller;
 import org.pilsgeschwader.furryironman.controller.common.ControllerException;
+import org.pilsgeschwader.furryironman.controller.common.InvalidApiKeyException;
 import org.pilsgeschwader.furryironman.controller.common.XMLApiRequest;
 import org.pilsgeschwader.furryironman.controller.common.XMLFileCache;
 import org.pilsgeschwader.furryironman.model.eve.EvECharacter;
@@ -29,6 +31,7 @@ public class CharacterController extends AbstractController
 {    
     private static final Logger logger = Logger.getLogger(CharacterController.class.getName());
     
+    //TODO: make something useful
     private final XMLFileCache charactersheetCache;
     
     public CharacterController()
@@ -62,31 +65,43 @@ public class CharacterController extends AbstractController
         CharacterHandler handler;
         Map<Integer, EvECharacter> tempResult = new HashMap<>();
         XMLApiRequest request;
-        for(ApiKey key : keys)
+        ApiKey key;
+        Iterator<ApiKey> iterator = keys.iterator();
+        while(iterator.hasNext())
+//        for(ApiKey key : keys)
         {
-            if(XMLApiRequest.Target.LIST_OF_CHARACTERS.matches(key.getAccessMask()))
+            key = iterator.next();
+            try
             {
-                request = new XMLApiRequest(XMLApiRequest.Target.LIST_OF_CHARACTERS);
-                handler = new CharacterHandler(key);
-                request.setXmlHandler(handler);
-                
-                makeApiXMLRequest(request, key);
-                logger.log(Level.INFO, "done reading characters from key {0}.", key.getKeyId());
-                for(EvECharacter temp : handler.getResult())
+                if(XMLApiRequest.Target.LIST_OF_CHARACTERS.matches(key.getAccessMask()))
                 {
-                    if(tempResult.containsKey(temp.getCharacterID()))
+                    request = new XMLApiRequest(XMLApiRequest.Target.LIST_OF_CHARACTERS);
+                    handler = new CharacterHandler(key);
+                    request.setXmlHandler(handler);
+
+                    makeApiXMLRequest(request, key);
+                    logger.log(Level.INFO, "done reading characters from key {0}.", key.getKeyId());
+                    for(EvECharacter temp : handler.getResult())
                     {
-                        tempResult.get(temp.getCharacterID()).addKey(key);
-                    }
-                    else
-                    {
-                        tempResult.put(temp.getCharacterID(), temp);
-                    }
+                        if(tempResult.containsKey(temp.getCharacterID()))
+                        {
+                            tempResult.get(temp.getCharacterID()).addKey(key);
+                        }
+                        else
+                        {
+                            tempResult.put(temp.getCharacterID(), temp);
+                        }
+                    }            
                 }            
+                else
+                {
+                    logger.log(Level.WARNING, "api key {0} does not support reading the character list.", key.getKeyId());
+                }
             }
-            else
+            catch(InvalidApiKeyException ex)
             {
-                logger.log(Level.WARNING, "api key {0} does not support reading the character list.", key.getKeyId());
+                logger.log(Level.SEVERE, "the api key {0} is invalid an will be removed.", ex.getKey().getKeyId());
+                iterator.remove();
             }
         }
         

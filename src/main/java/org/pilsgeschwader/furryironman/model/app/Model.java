@@ -30,6 +30,24 @@ public class Model
         characters = new ArrayList<>();
         itemDefinitions = new HashMap<>();
     }
+    
+    public boolean addApiKey(ApiKey key)
+    {
+        boolean alreadyStored = false;
+        for(ApiKey temp : storedKeys)
+        {
+            if(temp.getKeyId() == key.getKeyId())
+            {
+                alreadyStored = true;
+                break;
+            }
+        }
+        if(!alreadyStored)
+        {
+            storedKeys.add(key);
+        }
+        return !alreadyStored;
+    }
 
     public EvEItemDefinition getItemDefinitionById(int id)
     {

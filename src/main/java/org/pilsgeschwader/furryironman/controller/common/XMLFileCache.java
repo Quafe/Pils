@@ -6,7 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 /**
- *
+ * 
  * @author binarygamura
  */
 public class XMLFileCache
@@ -43,6 +43,5 @@ public class XMLFileCache
             stream = new FileInputStream(cacheFile);
         }
         return stream;
-    }
-    
+    }    
 }

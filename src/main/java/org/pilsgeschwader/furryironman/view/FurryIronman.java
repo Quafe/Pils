@@ -274,7 +274,12 @@ public class FurryIronman extends JFrame implements Runnable
         {
             buttonPanel.setEnabled(false);
             progressBar.setIndeterminate(true);
-            progressBar.setString("loading character list...");
+            progressBar.setString("revalidating api keys...");
+            
+            controller.revalidateAllApiKeys();
+            logger.info("done revalidating all api keys.");
+            progressBar.setString("done revalidating all api keys.");
+            
             controller.reloadCharacterList();
             DefaultListModel<EvECharacter> model = (DefaultListModel<EvECharacter>) allCharactersList.getModel();
             model.removeAllElements();
@@ -283,10 +288,10 @@ public class FurryIronman extends JFrame implements Runnable
             {
                 model.addElement(character);
                 
-            }
-            
+            }            
             logger.info("done reloading all characters.");
             progressBar.setString("done reloading all characters.");
+            
             controller.reloadAllCharacterImages();
             logger.info("done reloading all characters images.");
             progressBar.setString("done reloading all characters images.");
@@ -295,9 +300,7 @@ public class FurryIronman extends JFrame implements Runnable
             logger.info("done reloading all corp images.");
             progressBar.setString("done reloading all corp images.");
             
-            controller.revalidateAllApiKeys();
-            logger.info("done revalidating all api keys.");
-            progressBar.setString("done revalidating all api keys.");
+            
             
         }
         catch(URISyntaxException | IOException | ParserConfigurationException | SAXException | ControllerException ex)

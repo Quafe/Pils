@@ -78,6 +78,7 @@ public class ApiKeyManager extends AbstractDialog
             public void actionPerformed(ActionEvent e)
             {
                 addDialog.setLocationRelativeTo(ApiKeyManager.this);
+                addDialog.clearFields();
                 addDialog.setVisible(true);
                 reloadList();
             }

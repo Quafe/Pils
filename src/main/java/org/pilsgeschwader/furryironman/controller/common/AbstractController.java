@@ -51,7 +51,11 @@ public class AbstractController
             postRequest.setEntity(new UrlEncodedFormEntity(parameter));
             CloseableHttpResponse response = httpClient.execute(postRequest);
             StatusLine statusLine = response.getStatusLine();
-            if(statusLine.getStatusCode() != 200)
+            if(statusLine.getStatusCode() == 403)
+            {
+                throw new InvalidApiKeyException(apiKey);
+            }
+            else if(statusLine.getStatusCode() != 200)
             {
                 throw new ControllerException("request on \""+postRequest.getURI()+"\" failed. (response code "+statusLine.getStatusCode()+" => )"+statusLine.getReasonPhrase());
             }

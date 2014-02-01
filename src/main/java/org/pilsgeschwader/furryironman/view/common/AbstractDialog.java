@@ -46,7 +46,7 @@ public class AbstractDialog extends JDialog
                 dispose();
             }
         });
-        buttonPanel.add(closeButton);
+        buttonPanel.addButton(closeButton);
     }
     
     public AbstractDialog(String title, JDialog parent)
@@ -65,7 +65,7 @@ public class AbstractDialog extends JDialog
     public void startProgressBar(String message)
     {
         progressbar.setString(message);
-        progressbar.setIndeterminate(false);
+        progressbar.setIndeterminate(true);
     }
     
     protected boolean askYesNoQuestion(String title, String question)

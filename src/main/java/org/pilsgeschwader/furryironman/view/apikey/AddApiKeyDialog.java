@@ -35,6 +35,13 @@ public class AddApiKeyDialog extends AbstractDialog implements Runnable
         init();
     }
     
+    public void clearFields()
+    {
+        keyId.setText("");
+        vCodeField.setText("");
+    }
+    
+    
     private void init()
     {
         form = new SimpleForm();
@@ -66,7 +73,10 @@ public class AddApiKeyDialog extends AbstractDialog implements Runnable
             ApiKey key = new ApiKey(Integer.valueOf(keyId.getText().trim()), vCodeField.getText());
             Controller controller = manager.getParentGUI().getController();
             controller.keyController.validate(key);
-            controller.getModel().getStoredKeys().add(key);
+            if(!controller.getModel().addApiKey(key))
+            {
+                showError("key skipped", "the key "+key.getKeyId()+" is already stored.");
+            }
             dispose();
         }
         catch(NumberFormatException ex)

@@ -10,12 +10,14 @@ import java.io.OutputStreamWriter;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.parsers.ParserConfigurationException;
 import org.pilsgeschwader.furryironman.controller.common.AbstractController;
 import org.pilsgeschwader.furryironman.controller.common.ControllerException;
+import org.pilsgeschwader.furryironman.controller.common.InvalidApiKeyException;
 import org.pilsgeschwader.furryironman.controller.common.XMLApiRequest;
 import org.pilsgeschwader.furryironman.model.eve.ApiKey;
 import org.xml.sax.SAXException;
@@ -81,9 +83,21 @@ public class ApiKeyController extends AbstractController
     
     public void validateAll(List<ApiKey> keys) throws IOException, ControllerException, ParserConfigurationException, SAXException, URISyntaxException
     {
-        for(ApiKey key : keys)
+        Iterator<ApiKey> iterator = keys.iterator();
+        ApiKey key;
+//        for(ApiKey key : keys)
+        while(iterator.hasNext())
         {
-            validate(key);
+            key = iterator.next();
+            try
+            {
+                validate(key);
+            }
+            catch(InvalidApiKeyException ex)
+            {
+                logger.log(Level.SEVERE, "removing invalid api key {0}.", ex.getKey().getKeyId());
+                iterator.remove();
+            }
         }
     }
     
