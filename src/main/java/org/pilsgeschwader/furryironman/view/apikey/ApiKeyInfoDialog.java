@@ -3,7 +3,6 @@ package org.pilsgeschwader.furryironman.view.apikey;
 import java.awt.BorderLayout;
 import java.text.SimpleDateFormat;
 import java.util.List;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import org.pilsgeschwader.furryironman.controller.common.XMLApiRequest;
 import org.pilsgeschwader.furryironman.model.eve.ApiKey;
@@ -19,9 +18,12 @@ public class ApiKeyInfoDialog extends AbstractDialog implements Runnable
 {
     private final ApiKey key;
     
-    public ApiKeyInfoDialog(ApiKey key, JFrame parent)
+    private FurryIronman parent;
+    
+    public ApiKeyInfoDialog(ApiKey key, FurryIronman parent)
     {
         super("key info <"+key.getKeyId()+">", parent);
+        this.parent = parent;
         setModal(true);
         this.key = key;
         init();
@@ -46,7 +48,7 @@ public class ApiKeyInfoDialog extends AbstractDialog implements Runnable
     
     public void reload()
     {
-        FurryIronman.threadPool.execute(this);
+        parent.threadPool.execute(this);
     }
 
     @Override

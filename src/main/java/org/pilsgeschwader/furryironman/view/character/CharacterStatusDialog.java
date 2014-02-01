@@ -85,7 +85,7 @@ public class CharacterStatusDialog extends AbstractDialog implements ActionListe
     @Override
     public void actionPerformed(ActionEvent e)
     {
-        FurryIronman.threadPool.execute(this);
+        parent.threadPool.execute(this);
     }
 
     @Override

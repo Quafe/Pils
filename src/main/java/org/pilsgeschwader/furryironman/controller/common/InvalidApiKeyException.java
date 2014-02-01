@@ -10,7 +10,7 @@ import org.pilsgeschwader.furryironman.model.eve.ApiKey;
 
 /**
  *
- * @author binary gamura
+ * @author binarygamura
  */
 public class InvalidApiKeyException extends ControllerException
 {

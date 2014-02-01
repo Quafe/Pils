@@ -63,6 +63,16 @@ public class EvECharacterSheet
         implants = new ArrayList<>();
     }
 
+    public int getSkillPoints()
+    {
+        int sum = 0;
+        for(EvESkill skill : getSkills())
+        {
+            sum += skill.getSkillpoints();
+        }
+        return sum;
+    }
+    
     public String getAncestry()
     {
         return ancestry;
@@ -296,9 +306,7 @@ public class EvECharacterSheet
     @Override
     public String toString()
     {
-        return "EvECharacterSheet{" + "name=" + name + ", characterID=" + characterID + ", race=" + race + ", bloodline=" + bloodline + ", gender=" + gender + ", cloneName=" + cloneName + ", cloneSkillPoints=" + cloneSkillPoints + ", balance=" + balance + ", skills=" + skills + ", dateOfBirth=" + dateOfBirth + ", corpTitles=" + corpTitles + ", corpRoles=" + corpRoles + ", corpHqRoles=" + corpHqRoles + ", corporationID=" + corporationID + ", corporationName=" + corporationName + ", willpower=" + willpower + ", intelligence=" + intelligence + ", perception=" + perception + ", charisma=" + charisma + ", memory=" + memory + ", implants=" + implants + '}';
+        return "EvECharacterSheet{" + "name=" + name + ",\ncharacterID=" + characterID + ",\nrace=" + race + ",\nbloodline=" + bloodline + ",\ngender=" + gender + ",\ncloneName=" + cloneName + ",\ncloneSkillPoints=" + cloneSkillPoints + ",\nbalance=" + balance + ",\nskills=" + skills + ",\ndateOfBirth=" + dateOfBirth + ",\ncorpTitles=" + corpTitles + ",\ncorpRoles=" + corpRoles + ",\ncorpHqRoles=" + corpHqRoles + ",\ncorporationID=" + corporationID + ",\ncorporationName=" + corporationName + ",\nwillpower=" + willpower + ",\nintelligence=" + intelligence + ",\nperception=" + perception + ",\ncharisma=" + charisma + ",\nmemory=" + memory + ",\nimplants=" + implants + ",\nancestry=" + ancestry + '}';
     }
 
-    
-    
 }

@@ -54,6 +54,7 @@ public class CharacterController extends AbstractController
         XMLApiRequest request = new XMLApiRequest(XMLApiRequest.Target.CHARACTER_SHEET);
         CharacterSheetHandler handler = new CharacterSheetHandler(controller);
         request.setXmlHandler(handler);
+        request.getArguments().put("characterID", String.valueOf(character.getCharacterID()));
         makeApiXMLRequest(request, character.getKeys());
         return handler.getSheet();
     }

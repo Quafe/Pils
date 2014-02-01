@@ -1,27 +1,35 @@
 package org.pilsgeschwader.furryironman.view.character;
 
+import java.awt.BorderLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import org.pilsgeschwader.furryironman.model.eve.EvECharacterSheet;
 
 /**
  *
  * @author binarygamura
  */
-public abstract class CharacterSheetDialogApp extends JPanel implements Runnable
+abstract class AbstractCharacterSheetDialogApp extends JPanel implements Runnable
 {
-    protected String title = "unknown";
+    private static final String DEFAULT_TITLE = "unknown";
+    
+    protected String title = DEFAULT_TITLE;
 
     protected CharacterSheetDialog parent;        
     
-    public CharacterSheetDialogApp(CharacterSheetDialog parent)
+    AbstractCharacterSheetDialogApp(CharacterSheetDialog parent)
     {
+        super(new BorderLayout());
         this.parent = parent;
+        
     }
     
     public String getTitle()
     {
         return title;
     }    
+    
+    public abstract void onData(EvECharacterSheet sheet);
     
     public abstract void onReload();
     

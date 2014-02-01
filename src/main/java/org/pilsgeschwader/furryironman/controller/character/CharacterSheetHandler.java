@@ -140,7 +140,7 @@ public class CharacterSheetHandler implements XMLApiResponseHandler
                 {
                     format.parse(content);
                 }
-                catch(ParseException ex){}
+                catch(ParseException ex){ex.printStackTrace(System.err);}
                 break;
             case "race":
                 sheet.setRace(content);

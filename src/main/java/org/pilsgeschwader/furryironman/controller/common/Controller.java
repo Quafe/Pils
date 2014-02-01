@@ -15,6 +15,7 @@ import org.pilsgeschwader.furryironman.controller.solarsystem.SolarSystemControl
 import org.pilsgeschwader.furryironman.model.app.ApplicationConfig;
 import org.pilsgeschwader.furryironman.model.app.Model;
 import org.pilsgeschwader.furryironman.model.eve.EvECharacter;
+import org.pilsgeschwader.furryironman.model.eve.EvECharacterSheet;
 import org.xml.sax.SAXException;
 
 /**
@@ -77,7 +78,11 @@ public class Controller
     {
         keyController.validateAll(model.getStoredKeys());
     }
-        
+            
+    public EvECharacterSheet loadCharacterSheet(EvECharacter character) throws ControllerException, IOException, ParserConfigurationException, SAXException
+    {
+        return characterController.loadCharacterSheet(character, this);
+    }
     
     public void reloadAllEveCorporationImages()
     {

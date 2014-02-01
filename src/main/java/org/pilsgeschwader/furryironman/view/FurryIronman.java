@@ -39,6 +39,7 @@ import org.pilsgeschwader.furryironman.controller.common.PropertyNotFoundExcepti
 import org.pilsgeschwader.furryironman.model.app.ApplicationConfig;
 import org.pilsgeschwader.furryironman.model.eve.EvECharacter;
 import org.pilsgeschwader.furryironman.model.eve.EvECharacterSheet;
+import org.pilsgeschwader.furryironman.view.character.CharacterSheetDialog;
 import org.pilsgeschwader.furryironman.view.common.ButtonPanel;
 import org.pilsgeschwader.furryironman.view.common.RunnableActionListener;
 import org.pilsgeschwader.furryironman.view.icons.IconCache;
@@ -46,7 +47,6 @@ import org.xml.sax.SAXException;
 
 /**
  * 
- *
  */
 public class FurryIronman extends JFrame implements Runnable
 {
@@ -56,7 +56,7 @@ public class FurryIronman extends JFrame implements Runnable
     
     private static final Logger logger = Logger.getLogger(FurryIronman.class.getName());
     
-    public static final ExecutorService threadPool = Executors.newCachedThreadPool();
+    public final ExecutorService threadPool = Executors.newCachedThreadPool();
     
     private final ApiKeyManager apiKeyManager;
     
@@ -187,16 +187,15 @@ public class FurryIronman extends JFrame implements Runnable
                     {
                         buttonPanel.setEnabled(false);
                         progressBar.setIndeterminate(true);
-                        progressBar.setString("loading character sheet...");
-                        EvECharacterSheet loadCharacterSheet = controller.characterController.loadCharacterSheet(selected, controller);
-                        progressBar.setString("done character sheet...");
-                        System.out.println(loadCharacterSheet);
+                        CharacterSheetDialog dialog = new CharacterSheetDialog(FurryIronman.this, selected);
+                        dialog.setVisible(true);
+                        
 
                     }
-                    catch(ControllerException | IOException | ParserConfigurationException | SAXException ex)
-                    {
-                        ex.printStackTrace(System.err);
-                    }
+//                    catch(ControllerException | IOException | ParserConfigurationException | SAXException ex)
+//                    {
+//                        ex.printStackTrace(System.err);
+//                    }
                     finally
                     {
                         buttonPanel.setEnabled(true);
