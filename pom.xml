@@ -23,7 +23,7 @@
         </developer>
     </developers>
 
-    <name>FurryIronman</name>
+    <name>Pils</name>
     <url>http://maven.apache.org</url>
     <build>
         <plugins>
