@@ -2,9 +2,7 @@ package org.pilsgeschwader.furryironman.view.apikey;
 
 import java.awt.Component;
 import javax.swing.DefaultListCellRenderer;
-import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.ListCellRenderer;
 import org.pilsgeschwader.furryironman.model.eve.ApiKey;
 
 /**

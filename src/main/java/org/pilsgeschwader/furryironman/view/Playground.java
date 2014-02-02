@@ -6,14 +6,7 @@
 
 package org.pilsgeschwader.furryironman.view;
 
-import java.io.File;
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.Arrays;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.pilsgeschwader.furryironman.controller.common.DatabasePool;
-import org.pilsgeschwader.furryironman.controller.common.PropertyNotFoundException;
-import org.pilsgeschwader.furryironman.model.app.ApplicationConfig;
 
 /**
  *

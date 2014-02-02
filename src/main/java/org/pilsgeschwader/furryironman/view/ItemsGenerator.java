@@ -13,7 +13,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import org.pilsgeschwader.furryironman.model.eve.EvEItemDefinition;
-import org.pilsgeschwader.furryironman.model.eve.SolarSystem;
 
 /**
  *

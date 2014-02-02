@@ -11,7 +11,6 @@ import org.pilsgeschwader.furryironman.controller.common.XMLApiResponseHandler;
 import org.pilsgeschwader.furryironman.model.eve.EvEAugumentor;
 import org.pilsgeschwader.furryironman.model.eve.EvECharacterSheet;
 import org.pilsgeschwader.furryironman.model.eve.EvESkill;
-import org.pilsgeschwader.furryironman.model.eve.XMLElementNames;
 
 /**
  *
