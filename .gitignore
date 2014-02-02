@@ -1,9 +1,6 @@
 *.class
 
-# Eclipse
-.metadata/
-.project
-.settings/
+api_keys.csv
 
 # Package Files #
 *.jar
