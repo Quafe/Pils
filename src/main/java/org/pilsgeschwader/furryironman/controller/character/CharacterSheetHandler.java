@@ -182,19 +182,19 @@ public class CharacterSheetHandler implements XMLApiResponseHandler
             case "certificates":
                 state = State.IN_CERT;
                 break;
-            case "corporationRoles":
+            case "corporationroles":
                 state = State.IN_CORP_ROLES;
                 break;
-            case "corporationRolesAtHQ":
+            case "corporationrolesathq":
                 state = State.IN_CORP_HQ_ROLES;
                 break;
-            case "corporationTitles":
+            case "corporationtitles":
                 state = State.IN_CORP_TITLES;
                 break;
-            case "corporationRolesAtBase":
+            case "corporationrolesatbase":
                 //TODO write me!!!
                 break;
-            case "corporationRolesAtOther":
+            case "corporationrolesatother":
                 //TODO write me!!!
                 break;
             default:
@@ -213,17 +213,17 @@ public class CharacterSheetHandler implements XMLApiResponseHandler
             case IN_CERT:
                 break;
             case IN_CORP_HQ_ROLES:
-                sheet.addCorpHqRole(values.get("roleName"));
+                sheet.addCorpHqRole(values.get("rolename"));
                 break;
             case IN_CORP_ROLES:
-                sheet.addCorpRole(values.get("roleName"));
+                sheet.addCorpRole(values.get("rolename"));
                 break;
             case IN_CORP_TITLES:
-                sheet.addCorpTitle(values.get("titleName"));
+                sheet.addCorpTitle(values.get("titlename"));
                 break;
             case IN_SKILLS:
                 EvESkill skill = new EvESkill();
-                skill.setTypeId(Integer.valueOf(values.get("typeID")));
+                skill.setTypeId(Integer.valueOf(values.get("typeid")));
                 skill.setLevel(Integer.valueOf(values.get("level")));
                 skill.setSkillpoints(Integer.valueOf(values.get("skillpoints")));
                 skill.setItemDefinition(controller.getModel().getItemDefinitionById(skill.getTypeId()));
