@@ -12,6 +12,7 @@ import javax.swing.JScrollPane;
 import org.pilsgeschwader.furryironman.model.eve.ApiKey;
 import org.pilsgeschwader.furryironman.view.FurryIronman;
 import org.pilsgeschwader.furryironman.view.common.AbstractDialog;
+import org.pilsgeschwader.furryironman.view.icons.IconCache;
 
 /**
  *
@@ -28,6 +29,7 @@ public class ApiKeyManager extends AbstractDialog
     public ApiKeyManager(FurryIronman parentGUI)
     {
         super("manage api keys", parentGUI);
+        setIconImage(IconCache.getIcon("key_16.png").getImage());
         this.parentGUI = parentGUI;
         addDialog = new AddApiKeyDialog(ApiKeyManager.this);
         addWindowListener(new WindowAdapter()

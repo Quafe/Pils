@@ -23,6 +23,6 @@ public class CharacterSheetSkillsApp extends AbstractCharacterSheetDialogApp
     @Override
     public void onData(EvECharacterSheet sheet)
     {
-        
+        System.out.println("!YAY2!");
     }
 }

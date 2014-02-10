@@ -88,7 +88,7 @@ public class FurryIronman extends JFrame implements Runnable
     
     private void createJMenuBar()
     {
-        JMenuItem quitButton = new JMenuItem("quit");
+        JMenuItem quitButton = new JMenuItem("quit", IconCache.getIcon("cross_16.png"));
         quitButton.addActionListener(new ActionListener()
         {
             @Override
@@ -100,7 +100,7 @@ public class FurryIronman extends JFrame implements Runnable
         JMenu fileMenu = new JMenu("file");
         fileMenu.add(quitButton);
         
-        JMenuItem manageApiKeysButton = new JMenuItem("api keys");
+        JMenuItem manageApiKeysButton = new JMenuItem("api keys", IconCache.getIcon("key_16.png"));
         manageApiKeysButton.addActionListener(new ActionListener()
         {
 
@@ -140,7 +140,7 @@ public class FurryIronman extends JFrame implements Runnable
             }
         });        
         
-        JButton reloadAllCharactersButton = new JButton("reload");
+        JButton reloadAllCharactersButton = new JButton("reload", IconCache.getIcon("arrow_refresh_16.png"));
         reloadAllCharactersButton.addActionListener(new ActionListener()
         {
 
@@ -155,7 +155,7 @@ public class FurryIronman extends JFrame implements Runnable
         progressBar.setStringPainted(true);
         progressBar.setString("idle...");
         
-        JButton statusButton = new JButton("status");
+        JButton statusButton = new JButton("status", IconCache.getIcon("statistics_16.png"));
         statusButton.addActionListener(new ActionListener()
         {
             @Override
@@ -171,7 +171,7 @@ public class FurryIronman extends JFrame implements Runnable
             }
         });
         
-        JButton characterInfoButton = new JButton("info");
+        JButton characterInfoButton = new JButton("info", IconCache.getIcon("information_16.png"));
         characterInfoButton.addActionListener(new RunnableActionListener(new Runnable()
         {
 

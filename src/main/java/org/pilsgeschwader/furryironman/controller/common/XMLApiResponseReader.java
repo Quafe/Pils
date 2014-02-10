@@ -6,10 +6,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Stack;
 import java.util.logging.Logger;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+import org.pilsgeschwader.furryironman.model.app.XMLElements;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -22,15 +24,18 @@ public class XMLApiResponseReader extends DefaultHandler
 {
     private final XMLApiResponseHandler handler;
         
-    private final List<String> ignorableTags = new ArrayList<String>(){{add("cacheduntil");add("currenttime");add("result");add("eveapi");}};
+    private final List<String> ignorableTags = new ArrayList<String>(){{add(XMLElements.EXPIRES);add(XMLElements.CURRENTTIME);add(XMLElements.RESULT);add(XMLElements.EVEAPI);}};
     
     private StringBuilder textBuffer;
     
     private static final Logger logger = Logger.getLogger(XMLApiResponseReader.class.getName());
     
+    private final Stack<String> rowsets;
+    
     public XMLApiResponseReader(XMLApiResponseHandler handler)
     {
         this.handler = handler;
+        rowsets = new Stack<>();
     }
     
     public void read(InputStream stream) throws ParserConfigurationException, SAXException, IOException
@@ -49,7 +54,11 @@ public class XMLApiResponseReader extends DefaultHandler
     public void endElement(String uri, String localName, String qName) throws SAXException
     {
         qName = qName.toLowerCase();
-        if(!ignorableTags.contains(qName) && !qName.equals("row") && !qName.equals("rowset"))
+        if(qName.equals(XMLElements.ROWSET))
+        {
+            rowsets.pop();
+        }
+        else if(!ignorableTags.contains(qName) && !qName.equals(XMLElements.ROW) && !qName.equals(XMLElements.ROWSET))
         {
             handler.onUnknownElementEnd(qName, textBuffer.toString());
             
@@ -67,7 +76,7 @@ public class XMLApiResponseReader extends DefaultHandler
         for(int i = 0; i < attributes.getLength(); i++)
         {
             qName = attributes.getQName(i);
-            data.put(qName, attributes.getValue(qName));
+            data.put(qName.toLowerCase(), attributes.getValue(qName));
         }
         return data;
     }
@@ -75,7 +84,7 @@ public class XMLApiResponseReader extends DefaultHandler
     private String[] extractColumnNames(Attributes attributes)
     {
         String[] columnNames = new String[0];
-        String value = attributes.getValue("columns");
+        String value = attributes.getValue(XMLElements.COLUMNS);
         if(value != null)
         {
             columnNames = value.trim().split(",");
@@ -94,10 +103,11 @@ public class XMLApiResponseReader extends DefaultHandler
             switch(qName)
             {
                 case "rowset":
-                    handler.onRowSet(qName, attributes.getValue("name"), extractColumnNames(attributes));
+                    handler.onRowSet(qName, attributes.getValue(XMLElements.NAME).toLowerCase(), extractColumnNames(attributes), rowsets);
+                    rowsets.push(qName);
                     break;
                 case "row":
-                    handler.onRow(convertAttributes(attributes));
+                    handler.onRow(convertAttributes(attributes), rowsets);
                     break;
                 default:
                     handler.onUnknownElementStart(qName, convertAttributes(attributes));

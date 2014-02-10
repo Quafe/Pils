@@ -2,6 +2,7 @@ package org.pilsgeschwader.furryironman.view.character;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Image;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -54,11 +55,13 @@ public class EveCharacterRenderer extends JPanel implements ListCellRenderer<EvE
         
         try
         {
-            leftImageIcon.setIcon(new ImageIcon(controller.characterImageController.fetchImageFor(character.getCharacterID(), DEFAULT_IMAGE_SIZE)));
+            Image image = controller.characterImageController.fetchImageFor(character.getCharacterID(), DEFAULT_IMAGE_SIZE);
+            leftImageIcon.setIcon(image == null ? new ImageIcon() : new ImageIcon(image));
         }
         catch(IOException | ControllerException ex)
         {
             logger.log(Level.SEVERE, "unable to fetch character image for \"{0}\".", character.getCharacterID());
+            leftImageIcon.setIcon(new ImageIcon());
         }
         
         try

@@ -65,6 +65,7 @@ public class ApiKeyController extends AbstractController
     
     public List<ApiKey> load(InputStream stream) throws IOException
     {
+        ApiKey key = null;
         List<ApiKey> storedKeys = new ArrayList<>();
         try(BufferedReader reader = new BufferedReader(new InputStreamReader(stream)))
         {
@@ -72,8 +73,20 @@ public class ApiKeyController extends AbstractController
             int counter = 0;
             while((line = reader.readLine()) != null)
             {
-                storedKeys.add(loadLine(line));
-                counter++;
+                line = line.trim();
+                if(!line.isEmpty())
+                {
+                    key = loadLine(line);
+                    if(key != null)
+                    {
+                        storedKeys.add(key);
+                        counter++;
+                    }
+                    else
+                    {
+                        logger.log(Level.WARNING, "unable to parse api key from \"{0}\".", line);
+                    }
+                }
             }
             logger.log(Level.INFO, "read {0} api keys.", counter);
         }
@@ -102,10 +115,14 @@ public class ApiKeyController extends AbstractController
     
     private ApiKey loadLine(String line)
     {
+        ApiKey key = null;
         String[] splitted = line.split(DELIMITER, 2);
-        ApiKey key = new ApiKey();
-        key.setKeyId(Integer.valueOf(splitted[0]));
-        key.setVerificationString(splitted[1]);
+        if(splitted.length == 2 && !splitted[0].isEmpty() && !splitted[1].isEmpty())
+        {
+            key = new ApiKey();
+            key.setKeyId(Integer.valueOf(splitted[0]));
+            key.setVerificationString(splitted[1]);
+        }
         
         return key;
     }       

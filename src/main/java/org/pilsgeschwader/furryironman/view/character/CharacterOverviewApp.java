@@ -109,12 +109,13 @@ public class CharacterOverviewApp extends AbstractCharacterSheetDialogApp
         imageLabel.setMinimumSize(new Dimension(ICON_SIZE, ICON_SIZE));
         imageLabel.setMaximumSize(new Dimension(ICON_SIZE, ICON_SIZE));
         imageLabel.setPreferredSize(new Dimension(ICON_SIZE, ICON_SIZE));
+        imageLabel.setSize(new Dimension(ICON_SIZE, ICON_SIZE));
         
-        JPanel topWrapper = new JPanel();
-        topWrapper.setLayout(new BorderLayout());
-        topWrapper.add(imageLabel, BorderLayout.CENTER);
+//        JPanel topWrapper = new JPanel();
+//        topWrapper.setLayout(new BorderLayout());
+//        topWrapper.add(imageLabel, BorderLayout.CENTER);
         
-        add(topWrapper, BorderLayout.NORTH);
+        add(imageLabel, BorderLayout.WEST);
         add(form, BorderLayout.CENTER);
         
         
@@ -132,9 +133,17 @@ public class CharacterOverviewApp extends AbstractCharacterSheetDialogApp
         try
         {
             DecimalFormat format = new DecimalFormat("#");
-            Image image = parent.getParentApp().getController().characterImageController.fetchImageFor(sheet.getCharacterID(), ICON_SIZE);
-            imageLabel.setIcon(new ImageIcon(image));
-            
+            try
+            {
+                    
+                Image image = parent.getParentApp().getController().characterImageController.fetchImageFor(sheet.getCharacterID(), ICON_SIZE);
+                imageLabel.setIcon(new ImageIcon(image));
+            }
+            catch(ControllerException ex)
+            {
+                imageLabel.setIcon(new ImageIcon());
+            }
+            corpnameField.setText(sheet.getCorporationName());
             nameField.setText(sheet.getName());
             raceField.setText(sheet.getRace());
             bloodlineField.setText(sheet.getBloodline());
@@ -147,7 +156,7 @@ public class CharacterOverviewApp extends AbstractCharacterSheetDialogApp
             
             
         }
-        catch(IOException | ControllerException ex)
+        catch(IOException ex)
         {
             ex.printStackTrace(System.err);
         }

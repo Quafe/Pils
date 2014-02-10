@@ -1,6 +1,7 @@
 package org.pilsgeschwader.furryironman.controller.common;
 
 import java.util.Map;
+import java.util.Stack;
 
 /**
  *
@@ -12,7 +13,7 @@ public interface XMLApiResponseHandler
     
     public void onUnknownElementEnd(String element, String content);
     
-    public void onRowSet(String name, String key, String[] columns);
+    public void onRowSet(String name, String key, String[] columns, Stack<String> rowsets);
     
-    public void onRow(Map<String, String> values);
+    public void onRow(Map<String, String> values, Stack<String> rowsets);
 }

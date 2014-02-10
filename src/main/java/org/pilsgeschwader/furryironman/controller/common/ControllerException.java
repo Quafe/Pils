@@ -1,8 +1,8 @@
 package org.pilsgeschwader.furryironman.controller.common;
 
 /**
- *
- * @author binarygamura
+ * test
+ * @author binarygamura 
  */
 public class ControllerException extends Exception
 {

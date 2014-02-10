@@ -4,8 +4,10 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Map;
+import java.util.Stack;
 import java.util.logging.Logger;
 import org.pilsgeschwader.furryironman.controller.common.XMLApiResponseHandler;
+import org.pilsgeschwader.furryironman.model.app.XMLElements;
 import org.pilsgeschwader.furryironman.model.eve.ApiKey;
 
 class ApiKeyHandler implements XMLApiResponseHandler
@@ -27,10 +29,10 @@ class ApiKeyHandler implements XMLApiResponseHandler
     {
         try
         {
-            if(element.equals("key"))
+            if(element.equals(XMLElements.KEY))
             {
-                String dateValue = values.get("expires");
-                key.setAccessMask(Integer.valueOf(values.get("accessMask")));
+                String dateValue = values.get(XMLElements.EXPIRES);
+                key.setAccessMask(Integer.valueOf(values.get(XMLElements.ACCESSMASK)));
                 key.setValidTo(dateFormat.parse(dateValue == null || dateValue.isEmpty() ? "2100-01-01 00:00:00" : dateValue));
             }
         }
@@ -42,13 +44,13 @@ class ApiKeyHandler implements XMLApiResponseHandler
     }
 
     @Override
-    public void onRowSet(String name, String key, String[] columns)
+    public void onRowSet(String name, String key, String[] columns, Stack<String> rowsets)
     {
 
     }
 
     @Override
-    public void onRow(Map<String, String> values)
+    public void onRow(Map<String, String> values, Stack<String> rowsets)
     {
 
     }

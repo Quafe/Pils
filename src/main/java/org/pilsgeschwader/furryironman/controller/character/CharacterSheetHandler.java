@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Map;
+import java.util.Stack;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.pilsgeschwader.furryironman.controller.common.Controller;
@@ -169,7 +170,7 @@ public class CharacterSheetHandler implements XMLApiResponseHandler
     }
 
     @Override
-    public void onRowSet(String name, String key, String[] columns)
+    public void onRowSet(String name, String key, String[] columns, Stack<String> rowsets)
     {
         switch(key)
         {
@@ -203,7 +204,7 @@ public class CharacterSheetHandler implements XMLApiResponseHandler
     }
 
     @Override
-    public void onRow(Map<String, String> values)
+    public void onRow(Map<String, String> values, Stack<String> rowsets)
     {
         switch(state)
         {

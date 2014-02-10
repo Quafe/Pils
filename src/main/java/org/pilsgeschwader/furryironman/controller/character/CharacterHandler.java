@@ -3,9 +3,11 @@ package org.pilsgeschwader.furryironman.controller.character;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Stack;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.pilsgeschwader.furryironman.controller.common.XMLApiResponseHandler;
+import org.pilsgeschwader.furryironman.model.app.XMLElements;
 import org.pilsgeschwader.furryironman.model.eve.EvECharacter;
 import org.pilsgeschwader.furryironman.model.eve.ApiKey;
 
@@ -21,7 +23,7 @@ public class CharacterHandler implements XMLApiResponseHandler
     
     private static final Logger logger = Logger.getLogger(CharacterHandler.class.getName());
     
-    private ApiKey apiKey;
+    private final ApiKey apiKey;
     
     public CharacterHandler(ApiKey apiKey)
     {
@@ -39,7 +41,7 @@ public class CharacterHandler implements XMLApiResponseHandler
     }
 
     @Override
-    public void onRowSet(String name, String key, String[] columns)
+    public void onRowSet(String name, String key, String[] columns, Stack<String> rowsets)
     {
         
     }
@@ -54,17 +56,17 @@ public class CharacterHandler implements XMLApiResponseHandler
      * @param values 
      */
     @Override
-    public void onRow(Map<String, String> values)
+    public void onRow(Map<String, String> values, Stack<String> rowsets)
     {
         
-        Integer characterId = Integer.valueOf(values.get("characterID"));
+        Integer characterId = Integer.valueOf(values.get(XMLElements.CHARACTERID));
         if(!knownCharacters.contains(characterId))
         {
             EvECharacter character = new EvECharacter();
             character.setCharacterID(characterId);
-            character.setCharacterName(values.get("name"));
-            character.setCorporationID(Integer.valueOf(values.get("corporationID")));
-            character.setCorporationName(values.get("corporationName"));
+            character.setCharacterName(values.get(XMLElements.NAME));
+            character.setCorporationID(Integer.valueOf(values.get(XMLElements.CORPORATIONID)));
+            character.setCorporationName(values.get(XMLElements.CORPORATIONNAME));
             character.addKey(apiKey);
             characters.add(character);
             knownCharacters.add(characterId);

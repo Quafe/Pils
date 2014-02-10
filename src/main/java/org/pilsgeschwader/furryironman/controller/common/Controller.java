@@ -113,6 +113,7 @@ public class Controller
                 ex.printStackTrace(System.err);
             }
         }
+        logger.info("done reloading all character images..");
     }
     
     public void reloadCharacterList() throws URISyntaxException, IOException, ParserConfigurationException, SAXException, ControllerException

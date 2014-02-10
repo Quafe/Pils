@@ -16,6 +16,7 @@ import org.pilsgeschwader.furryironman.model.eve.EvECharacterSheet;
 import org.pilsgeschwader.furryironman.view.FurryIronman;
 import org.pilsgeschwader.furryironman.view.common.AbstractDialog;
 import org.pilsgeschwader.furryironman.view.common.RunnableActionListener;
+import org.pilsgeschwader.furryironman.view.icons.IconCache;
 import org.xml.sax.SAXException;
 
 /**
@@ -37,6 +38,7 @@ public class CharacterSheetDialog extends AbstractDialog implements Runnable
     public CharacterSheetDialog(FurryIronman parent, EvECharacter character)
     {
         super("Character Sheet", parent);
+        setModal(false);
         apps = new ArrayList<>();
         this.parent = parent;
         this.character = character;
@@ -88,7 +90,7 @@ public class CharacterSheetDialog extends AbstractDialog implements Runnable
         pane.setTabPlacement(JTabbedPane.LEFT);
         add(pane, BorderLayout.CENTER);
         
-        JButton reloadButton = new JButton("reload");
+        JButton reloadButton = new JButton("reload", IconCache.getIcon("arrow_refresh_16.png"));
         reloadButton.addActionListener(new RunnableActionListener(this));
         
         buttonPanel.addButton(reloadButton);
