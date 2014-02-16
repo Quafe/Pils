@@ -17,6 +17,7 @@ import org.pilsgeschwader.furryironman.view.FurryIronman;
 import org.pilsgeschwader.furryironman.view.common.AbstractDialog;
 import org.pilsgeschwader.furryironman.view.common.SimpleForm;
 import org.pilsgeschwader.furryironman.view.icons.IconCache;
+import org.pilsgeschwader.furryironman.view.icons.IconNames;
 import org.xml.sax.SAXException;
 
 /**
@@ -51,7 +52,7 @@ public class CharacterStatusDialog extends AbstractDialog implements ActionListe
     
     private void init()
     {
-        JButton reloadButton = new JButton("reload", IconCache.getIcon("arrow_refresh_16.png"));
+        JButton reloadButton = new JButton("reload", IconCache.getIcon(IconNames.RELOAD));
         reloadButton.addActionListener(this);
         
         buttonPanel.addButton(reloadButton);

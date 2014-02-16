@@ -24,12 +24,22 @@ public final class XMLElements
     public static final class Rowsets
     {
         public static final String SKILLGROUPS = "skillgroups";
+        public static final String REQUIREDSKILLS = "requiredskills";
+        public static final String SKILLBONUSCOLLECTION = "skillbonuscollection";
+        public static final String SKILLS = "skills";
     }
     
     public static final class Attributes
     {
+        public static final String GROUPID = "groupid";
+        public static final String BONUSVALUE = "bonusvalue";
         public static final String GROUPNAME = "groupname";
         public static final String TYPENAME = "typename";
+        public static final String TYPEID = "typeid";
+        public static final String PUBLISHED = "published";
+        public static final String SKILLLEVEL = "skilllevel";
+        public static final String BONUSTYPE = "bonustype";
+        
         
         
     }

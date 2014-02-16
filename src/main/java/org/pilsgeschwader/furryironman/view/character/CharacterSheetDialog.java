@@ -17,6 +17,7 @@ import org.pilsgeschwader.furryironman.view.FurryIronman;
 import org.pilsgeschwader.furryironman.view.common.AbstractDialog;
 import org.pilsgeschwader.furryironman.view.common.RunnableActionListener;
 import org.pilsgeschwader.furryironman.view.icons.IconCache;
+import org.pilsgeschwader.furryironman.view.icons.IconNames;
 import org.xml.sax.SAXException;
 
 /**
@@ -90,7 +91,7 @@ public class CharacterSheetDialog extends AbstractDialog implements Runnable
         pane.setTabPlacement(JTabbedPane.LEFT);
         add(pane, BorderLayout.CENTER);
         
-        JButton reloadButton = new JButton("reload", IconCache.getIcon("arrow_refresh_16.png"));
+        JButton reloadButton = new JButton("reload", IconCache.getIcon(IconNames.RELOAD));
         reloadButton.addActionListener(new RunnableActionListener(this));
         
         buttonPanel.addButton(reloadButton);
@@ -111,6 +112,7 @@ public class CharacterSheetDialog extends AbstractDialog implements Runnable
         try
         {
             startProgressBar("loading charcter sheet...");
+            buttonPanel.setEnabled(false);
             sheet = parent.getController().loadCharacterSheet(character);
             for(AbstractCharacterSheetDialogApp app : apps)
             {
@@ -126,6 +128,7 @@ public class CharacterSheetDialog extends AbstractDialog implements Runnable
         finally
         {
             stopProgressBar(null);
+            buttonPanel.setEnabled(true);
         }
     }
 }

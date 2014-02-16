@@ -8,6 +8,8 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
+import org.pilsgeschwader.furryironman.view.icons.IconCache;
+import org.pilsgeschwader.furryironman.view.icons.IconNames;
 
 /**
  *
@@ -36,7 +38,7 @@ public class AbstractDialog extends JDialog
     
     public void addDefaultCloseButton()
     {
-        JButton closeButton = new JButton("close");
+        JButton closeButton = new JButton("close", IconCache.getIcon(IconNames.CANCEL));
         closeButton.addActionListener(new ActionListener()
         {
 

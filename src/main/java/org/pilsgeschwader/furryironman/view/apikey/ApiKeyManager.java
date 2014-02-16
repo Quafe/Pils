@@ -13,6 +13,7 @@ import org.pilsgeschwader.furryironman.model.eve.ApiKey;
 import org.pilsgeschwader.furryironman.view.FurryIronman;
 import org.pilsgeschwader.furryironman.view.common.AbstractDialog;
 import org.pilsgeschwader.furryironman.view.icons.IconCache;
+import org.pilsgeschwader.furryironman.view.icons.IconNames;
 
 /**
  *
@@ -29,7 +30,7 @@ public class ApiKeyManager extends AbstractDialog
     public ApiKeyManager(FurryIronman parentGUI)
     {
         super("manage api keys", parentGUI);
-        setIconImage(IconCache.getIcon("key_16.png").getImage());
+        setIconImage(IconCache.getIcon(IconNames.KEY).getImage());
         this.parentGUI = parentGUI;
         addDialog = new AddApiKeyDialog(ApiKeyManager.this);
         addWindowListener(new WindowAdapter()
@@ -63,7 +64,7 @@ public class ApiKeyManager extends AbstractDialog
     private void init()
     {
         
-        JButton closeButton = new JButton("close");
+        JButton closeButton = new JButton("close", IconCache.getIcon(IconNames.CANCEL));
         closeButton.addActionListener(new ActionListener()
         {
             @Override
@@ -73,7 +74,7 @@ public class ApiKeyManager extends AbstractDialog
             }
         });
         
-        JButton addButton = new JButton("add");
+        JButton addButton = new JButton("add", IconCache.getIcon(IconNames.ADD));
         addButton.addActionListener(new ActionListener()
         {
             @Override
@@ -85,7 +86,7 @@ public class ApiKeyManager extends AbstractDialog
                 reloadList();
             }
         });
-        JButton removeButton = new JButton("remove");
+        JButton removeButton = new JButton("remove", IconCache.getIcon(IconNames.REMOVE));
         removeButton.addActionListener(new ActionListener()
         {
             @Override
@@ -102,7 +103,7 @@ public class ApiKeyManager extends AbstractDialog
                 }
             }
         });
-        JButton infoButton = new JButton("info");
+        JButton infoButton = new JButton("info", IconCache.getIcon(IconNames.INFO));
         infoButton.addActionListener(new ActionListener()
         {
             @Override

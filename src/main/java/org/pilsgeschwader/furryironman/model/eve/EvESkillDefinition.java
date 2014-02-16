@@ -27,11 +27,44 @@ public class EvESkillDefinition
     
     private EvEAugumentor.Type secondaryAttribute;
     
+    private final List<EvESkillBonus> bonis;
+    
     public EvESkillDefinition()
     {
         requirements = new ArrayList<>();
+        bonis = new ArrayList<>();
     }
 
+    public EvEAugumentor.Type getPrimaryAttribute()
+    {
+        return primaryAttribute;
+    }
+
+    public void setPrimaryAttribute(EvEAugumentor.Type primaryAttribute)
+    {
+        this.primaryAttribute = primaryAttribute;
+    }
+
+    public EvEAugumentor.Type getSecondaryAttribute()
+    {
+        return secondaryAttribute;
+    }
+
+    public void setSecondaryAttribute(EvEAugumentor.Type secondaryAttribute)
+    {
+        this.secondaryAttribute = secondaryAttribute;
+    }
+
+    public List<EveSkillTreeRequirement> getRequirements()
+    {
+        return requirements;
+    }
+
+    public List<EvESkillBonus> getBonis()
+    {
+        return bonis;
+    }
+    
     public String getTypeName()
     {
         return typeName;
@@ -91,6 +124,11 @@ public class EvESkillDefinition
     {
         this.rank = rank;
     }
-    
+
+    @Override
+    public String toString()
+    {
+        return "EvESkillDefinition{" + "typeName=" + typeName + ", groupID=" + groupID + ", typeID=" + typeID + ", published=" + published + ", description=" + description + ", rank=" + rank + ", requirements=" + requirements + ", primaryAttribute=" + primaryAttribute + ", secondaryAttribute=" + secondaryAttribute + ", bonis=" + bonis + '}';
+    }
     
 }

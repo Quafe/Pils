@@ -9,3 +9,13 @@ api_keys.csv
 *.png
 *.jpg
 /target/
+!/src/main/resources/org/pilsgeschwader/furryironman/view/icons/cross_16.png
+!/src/main/resources/org/pilsgeschwader/furryironman/view/icons/information_16.png
+!/src/main/resources/org/pilsgeschwader/furryironman/view/icons/key_16.png
+!/src/main/resources/org/pilsgeschwader/furryironman/view/icons/arrow_refresh_16.png
+!/src/main/resources/org/pilsgeschwader/furryironman/view/icons/statistics_16.png
+!/src/main/resources/org/pilsgeschwader/furryironman/view/icons/plus_16.png
+!/src/main/resources/org/pilsgeschwader/furryironman/view/icons/delete_16.png
+!/src/main/resources/org/pilsgeschwader/furryironman/view/icons/accept_16.png
+!/src/main/resources/org/pilsgeschwader/furryironman/view/icons/skillbook_32.png
+!/src/main/resources/org/pilsgeschwader/furryironman/view/icons/magnifier_16.png

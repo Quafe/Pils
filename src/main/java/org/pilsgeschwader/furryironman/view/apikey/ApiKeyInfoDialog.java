@@ -10,6 +10,7 @@ import org.pilsgeschwader.furryironman.view.FurryIronman;
 import org.pilsgeschwader.furryironman.view.common.AbstractDialog;
 import org.pilsgeschwader.furryironman.view.common.SimpleForm;
 import org.pilsgeschwader.furryironman.view.icons.IconCache;
+import org.pilsgeschwader.furryironman.view.icons.IconNames;
 
 /**
  *
@@ -24,7 +25,7 @@ public class ApiKeyInfoDialog extends AbstractDialog implements Runnable
     public ApiKeyInfoDialog(ApiKey key, FurryIronman parent)
     {
         super("key info <"+key.getKeyId()+">", parent);
-        setIconImage(IconCache.getIcon("key_16.png").getImage());
+        setIconImage(IconCache.getIcon(IconNames.KEY).getImage());
         this.parent = parent;
         setModal(true);
         this.key = key;

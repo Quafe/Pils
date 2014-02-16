@@ -103,8 +103,9 @@ public class XMLApiResponseReader extends DefaultHandler
             switch(qName)
             {
                 case "rowset":
-                    handler.onRowSet(qName, attributes.getValue(XMLElements.NAME).toLowerCase(), extractColumnNames(attributes), rowsets);
-                    rowsets.push(qName);
+                    String name = attributes.getValue(XMLElements.NAME).toLowerCase();
+                    handler.onRowSet(qName, name, extractColumnNames(attributes), rowsets);
+                    rowsets.push(name);
                     break;
                 case "row":
                     handler.onRow(convertAttributes(attributes), rowsets);

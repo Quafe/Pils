@@ -8,6 +8,7 @@ import java.util.Map;
 import org.pilsgeschwader.furryironman.model.eve.EvECharacter;
 import org.pilsgeschwader.furryironman.model.eve.ApiKey;
 import org.pilsgeschwader.furryironman.model.eve.EvEItemDefinition;
+import org.pilsgeschwader.furryironman.model.eve.EvESkillTree;
 
 /**
  *
@@ -22,6 +23,8 @@ public class Model
     private List<EvECharacter> characters;
     
     private Map<Integer, EvEItemDefinition> itemDefinitions;
+    
+    private EvESkillTree skilltree;
     
     public Model()
     {
@@ -94,6 +97,14 @@ public class Model
     {
         this.itemDefinitions = itemDefinitions;
     }
-    
-    
+
+    public EvESkillTree getSkilltree()
+    {
+        return skilltree;
+    }
+
+    public void setSkilltree(EvESkillTree skilltree)
+    {
+        this.skilltree = skilltree;
+    }
 }

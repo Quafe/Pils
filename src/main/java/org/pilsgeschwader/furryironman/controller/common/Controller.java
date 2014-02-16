@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.logging.Logger;
 import javax.xml.parsers.ParserConfigurationException;
 import org.pilsgeschwader.furryironman.controller.character.CharacterController;
+import org.pilsgeschwader.furryironman.controller.skills.SkillTreeImporter;
 import org.pilsgeschwader.furryironman.controller.solarsystem.SolarSystemController;
 import org.pilsgeschwader.furryironman.model.app.ApplicationConfig;
 import org.pilsgeschwader.furryironman.model.app.Model;
@@ -69,9 +70,16 @@ public class Controller
         this.config = config;
         
         model.setStoredKeys(keyController.load(new FileInputStream(KEY_STORE_FILE)));
+        logger.info("done loading api keys.");
         model.setSolarSystems(solarSystemController.readSystems(new FileInputStream(SOLAR_SYSTEMS_FILE)));
+        logger.info("done loading solar systems.");
         model.setCharacters(characterController.loadAllCharacters(model.getStoredKeys()));        
+        logger.info("done loading characters.");
         model.setItemDefinitions(itemDefinitionController.loadItems(new FileInputStream(ITEM_DEF_FILE)));
+        logger.info("done loading utems.");
+        SkillTreeImporter importer = new SkillTreeImporter();
+        model.setSkilltree(importer.loadSkilltree(new FileInputStream("./skills_2014_02_10.xml")));
+        logger.info("done loading skilltree.");
     }
     
     public void revalidateAllApiKeys() throws IOException, ControllerException, ParserConfigurationException, SAXException, URISyntaxException

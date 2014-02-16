@@ -41,6 +41,8 @@ import org.pilsgeschwader.furryironman.view.character.CharacterSheetDialog;
 import org.pilsgeschwader.furryironman.view.common.ButtonPanel;
 import org.pilsgeschwader.furryironman.view.common.RunnableActionListener;
 import org.pilsgeschwader.furryironman.view.icons.IconCache;
+import org.pilsgeschwader.furryironman.view.icons.IconNames;
+import org.pilsgeschwader.furryironman.view.skills.SkillTreeDialog;
 import org.xml.sax.SAXException;
 
 /**
@@ -65,7 +67,7 @@ public class FurryIronman extends JFrame implements Runnable
     private FurryIronman() throws URISyntaxException
     {
         super("EveCombatMapper");
-        setIconImage(IconCache.getIcon("74_64_13.png").getImage());
+        setIconImage(IconCache.getIcon(IconNames.ICON).getImage());
         controller = new Controller();
         apiKeyManager = new ApiKeyManager(this);
     }
@@ -88,7 +90,7 @@ public class FurryIronman extends JFrame implements Runnable
     
     private void createJMenuBar()
     {
-        JMenuItem quitButton = new JMenuItem("quit", IconCache.getIcon("cross_16.png"));
+        JMenuItem quitButton = new JMenuItem("quit", IconCache.getIcon(IconNames.CANCEL));
         quitButton.addActionListener(new ActionListener()
         {
             @Override
@@ -100,7 +102,22 @@ public class FurryIronman extends JFrame implements Runnable
         JMenu fileMenu = new JMenu("file");
         fileMenu.add(quitButton);
         
-        JMenuItem manageApiKeysButton = new JMenuItem("api keys", IconCache.getIcon("key_16.png"));
+        
+        JMenuItem skilltreeButton = new JMenuItem("skill tree");
+        skilltreeButton.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                SkillTreeDialog dialog = new SkillTreeDialog(FurryIronman.this, controller.getModel().getSkilltree());
+                dialog.setLocationRelativeTo(FurryIronman.this);
+                dialog.setVisible(true);
+            }
+        });
+        JMenuItem toolMenu = new JMenu("tools");
+        toolMenu.add(skilltreeButton);
+        
+        JMenuItem manageApiKeysButton = new JMenuItem("api keys", IconCache.getIcon(IconNames.KEY));
         manageApiKeysButton.addActionListener(new ActionListener()
         {
 
@@ -117,6 +134,7 @@ public class FurryIronman extends JFrame implements Runnable
         
         JMenuBar menuBar = new JMenuBar();
         menuBar.add(fileMenu);
+        menuBar.add(toolMenu);
         menuBar.add(optionsMenu);
         
         setJMenuBar(menuBar);
@@ -140,7 +158,7 @@ public class FurryIronman extends JFrame implements Runnable
             }
         });        
         
-        JButton reloadAllCharactersButton = new JButton("reload", IconCache.getIcon("arrow_refresh_16.png"));
+        JButton reloadAllCharactersButton = new JButton("reload", IconCache.getIcon(IconNames.RELOAD));
         reloadAllCharactersButton.addActionListener(new ActionListener()
         {
 
@@ -155,7 +173,7 @@ public class FurryIronman extends JFrame implements Runnable
         progressBar.setStringPainted(true);
         progressBar.setString("idle...");
         
-        JButton statusButton = new JButton("status", IconCache.getIcon("statistics_16.png"));
+        JButton statusButton = new JButton("status", IconCache.getIcon(IconNames.STATS));
         statusButton.addActionListener(new ActionListener()
         {
             @Override
@@ -171,7 +189,7 @@ public class FurryIronman extends JFrame implements Runnable
             }
         });
         
-        JButton characterInfoButton = new JButton("info", IconCache.getIcon("information_16.png"));
+        JButton characterInfoButton = new JButton("info", IconCache.getIcon(IconNames.INFO));
         characterInfoButton.addActionListener(new RunnableActionListener(new Runnable()
         {
 
@@ -190,10 +208,6 @@ public class FurryIronman extends JFrame implements Runnable
                         
 
                     }
-//                    catch(ControllerException | IOException | ParserConfigurationException | SAXException ex)
-//                    {
-//                        ex.printStackTrace(System.err);
-//                    }
                     finally
                     {
                         buttonPanel.setEnabled(true);

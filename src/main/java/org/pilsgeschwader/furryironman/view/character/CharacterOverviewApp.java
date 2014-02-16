@@ -64,6 +64,7 @@ public class CharacterOverviewApp extends AbstractCharacterSheetDialogApp
     public CharacterOverviewApp(CharacterSheetDialog parent)
     {
         super(parent);
+        title = "overview";
         init();
     }
     

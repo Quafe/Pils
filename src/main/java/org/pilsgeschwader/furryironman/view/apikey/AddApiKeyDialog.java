@@ -13,6 +13,7 @@ import org.pilsgeschwader.furryironman.controller.common.Controller;
 import org.pilsgeschwader.furryironman.controller.common.ControllerException;
 import org.pilsgeschwader.furryironman.model.eve.ApiKey;
 import org.pilsgeschwader.furryironman.view.icons.IconCache;
+import org.pilsgeschwader.furryironman.view.icons.IconNames;
 import org.xml.sax.SAXException;
 
 /**
@@ -32,7 +33,7 @@ public class AddApiKeyDialog extends AbstractDialog implements Runnable
     public AddApiKeyDialog(ApiKeyManager manager)
     {
         super("add api key", manager);
-        setIconImage(IconCache.getIcon("key_16.png").getImage());
+        setIconImage(IconCache.getIcon(IconNames.KEY).getImage());
         this.manager = manager;
         init();
     }
@@ -48,7 +49,7 @@ public class AddApiKeyDialog extends AbstractDialog implements Runnable
     {
         form = new SimpleForm();
         
-        JButton addButton = new JButton("add");
+        JButton addButton = new JButton("add", IconCache.getIcon(IconNames.ADD));
         addButton.addActionListener(new RunnableActionListener(this));
         
         buttonPanel.addButton(addButton);
