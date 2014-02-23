@@ -2,6 +2,7 @@ package org.pilsgeschwader.furryironman.controller.character;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 import java.util.Stack;
 import java.util.logging.Level;
@@ -78,4 +79,10 @@ public class CharacterStatusHandler implements XMLApiResponseHandler
             ex.printStackTrace(System.err);
         }
     }    
+
+    @Override
+    public void onCachedUntil(Date date)
+    {
+        
+    }
 }

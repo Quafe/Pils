@@ -1,6 +1,7 @@
 package org.pilsgeschwader.furryironman.controller.character;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Stack;
@@ -76,6 +77,12 @@ public class CharacterHandler implements XMLApiResponseHandler
 
     @Override
     public void onUnknownElementEnd(String element, String content)
+    {
+        
+    }
+
+    @Override
+    public void onCachedUntil(Date date)
     {
         
     }

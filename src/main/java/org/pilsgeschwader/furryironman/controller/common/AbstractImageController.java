@@ -23,7 +23,7 @@ import org.apache.http.util.EntityUtils;
  *
  * @author binarygamura
  */
-public class AbstractImageController extends AbstractController
+public class AbstractImageController //extends AbstractController
 {
     private final File imageBaseDir;
     
@@ -41,7 +41,6 @@ public class AbstractImageController extends AbstractController
     
     public AbstractImageController(File imageBaseDir, URI baseUri, String expectedImageType)
     {
-        super();
         this.imageBaseDir = imageBaseDir;
         this.expectedImageType = expectedImageType;
         this.baseUri = baseUri;
@@ -70,13 +69,18 @@ public class AbstractImageController extends AbstractController
     
     public Image fetchImageFor(int id, int size) throws IOException, ControllerException
     {
+        return fetchImageFor(id, size, false);
+    }
+    
+    public Image fetchImageFor(int id, int size, boolean force) throws IOException, ControllerException
+    {
         BufferedImage image;
         String key = id+"_"+size;
         if(!imageCache.containsKey(key))
         {
             String targetPath = imageBaseDir.getAbsolutePath()+"/"+key+"."+expectedImageType;
             File targetFile = new File(targetPath);
-            if(targetFile.exists())
+            if(targetFile.exists() && !force)
             {
                 try(FileInputStream fileStream = new FileInputStream(targetFile))
                 {

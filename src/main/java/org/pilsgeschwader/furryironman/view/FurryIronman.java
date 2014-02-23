@@ -38,11 +38,13 @@ import org.pilsgeschwader.furryironman.controller.common.PropertyNotFoundExcepti
 import org.pilsgeschwader.furryironman.model.app.ApplicationConfig;
 import org.pilsgeschwader.furryironman.model.eve.EvECharacter;
 import org.pilsgeschwader.furryironman.view.character.CharacterSheetDialog;
+import org.pilsgeschwader.furryironman.view.character.SaveCharacterImageDialog;
 import org.pilsgeschwader.furryironman.view.common.ButtonPanel;
 import org.pilsgeschwader.furryironman.view.common.RunnableActionListener;
 import org.pilsgeschwader.furryironman.view.icons.IconCache;
 import org.pilsgeschwader.furryironman.view.icons.IconNames;
 import org.pilsgeschwader.furryironman.view.skills.SkillTreeDialog;
+import org.pushingpixels.substance.api.skin.SubstanceRavenLookAndFeel;
 import org.xml.sax.SAXException;
 
 /**
@@ -114,8 +116,22 @@ public class FurryIronman extends JFrame implements Runnable
                 dialog.setVisible(true);
             }
         });
+        
+        JMenuItem saveCharImageMenu = new JMenuItem("save avatar");
+        saveCharImageMenu.addActionListener(new RunnableActionListener(new Runnable()
+        {
+
+            @Override
+            public void run()
+            {
+                SaveCharacterImageDialog dialog = new SaveCharacterImageDialog(FurryIronman.this);
+                dialog.setVisible(true);
+            }
+        }, true));
+        
         JMenuItem toolMenu = new JMenu("tools");
         toolMenu.add(skilltreeButton);
+        toolMenu.add(saveCharImageMenu);
         
         JMenuItem manageApiKeysButton = new JMenuItem("api keys", IconCache.getIcon(IconNames.KEY));
         manageApiKeysButton.addActionListener(new ActionListener()
@@ -215,7 +231,7 @@ public class FurryIronman extends JFrame implements Runnable
                     }
                 }
             }
-        }
+        }, true
         ));
         
         buttonPanel = new ButtonPanel();
@@ -252,11 +268,16 @@ public class FurryIronman extends JFrame implements Runnable
                 {
                     try
                     {
-                        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+//                        UIManager.setLookAndFeel(new SubstanceBusinessBlackSteelLookAndFeel());
+//                        UIManager.setLookAndFeel(new SubstanceGraphiteLookAndFeel());
+//                        UIManager.setLookAndFeel(new SubstanceTwilightLookAndFeel());
+//                        UIManager.setLookAndFeel(new SubstanceMistAquaLookAndFeel());
+                        UIManager.setLookAndFeel(new SubstanceRavenLookAndFeel());
+                        
                         JFrame.setDefaultLookAndFeelDecorated(true);
                         JDialog.setDefaultLookAndFeelDecorated(true);
                     }
-                    catch(ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ex){}
+                    catch(UnsupportedLookAndFeelException ex){logger.warning("laf is not supported!");}
                     new FurryIronman().init().setVisible(true);
                 }
                 catch(PropertyNotFoundException ex)

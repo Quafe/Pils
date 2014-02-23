@@ -19,6 +19,7 @@ import javax.swing.JTextField;
 import org.pilsgeschwader.furryironman.controller.common.ControllerException;
 import org.pilsgeschwader.furryironman.model.eve.EvECharacterSheet;
 import org.pilsgeschwader.furryironman.view.common.SimpleForm;
+import org.pilsgeschwader.furryironman.view.common.Util;
 
 /**
  *
@@ -134,6 +135,7 @@ public class CharacterOverviewApp extends AbstractCharacterSheetDialogApp
         try
         {
             DecimalFormat format = new DecimalFormat("#");
+            NumberFormat iskFormat = Util.getIskNumberFormatter();
             try
             {
                     
@@ -151,7 +153,7 @@ public class CharacterOverviewApp extends AbstractCharacterSheetDialogApp
             genderField.setText(sheet.getGender());
             cloneNameField.setText(sheet.getCloneName());
             cloneSkillPointsField.setText(format.format(sheet.getCloneSkillPoints()));
-            balanceField.setText(NumberFormat.getCurrencyInstance().format(sheet.getBalance()));
+            balanceField.setText(iskFormat.format(sheet.getBalance()));
             numberOfSkillField.setText(sheet.getSkills() == null ? "unknown" : String.valueOf(sheet.getSkills().size()));
             skillPointsField.setText(format.format(sheet.getSkillPoints()));
             

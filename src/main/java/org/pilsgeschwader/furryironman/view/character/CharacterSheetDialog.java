@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JTabbedPane;
+import javax.swing.SwingUtilities;
 import javax.xml.parsers.ParserConfigurationException;
 import org.pilsgeschwader.furryironman.controller.common.ControllerException;
 import org.pilsgeschwader.furryironman.model.eve.EvECharacter;
@@ -64,6 +65,7 @@ public class CharacterSheetDialog extends AbstractDialog implements Runnable
     
     public void reloadData() throws ControllerException, IOException, ParserConfigurationException, SAXException
     {
+//        SwingUtilities.invokeLater(this);
         parent.threadPool.submit(this);
     }
     

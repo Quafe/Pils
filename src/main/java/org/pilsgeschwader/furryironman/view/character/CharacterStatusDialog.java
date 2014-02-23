@@ -5,10 +5,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.xml.parsers.ParserConfigurationException;
 import org.pilsgeschwader.furryironman.controller.common.ControllerException;
 import org.pilsgeschwader.furryironman.model.eve.EvECharacter;
@@ -87,6 +89,7 @@ public class CharacterStatusDialog extends AbstractDialog implements ActionListe
     @Override
     public void actionPerformed(ActionEvent e)
     {
+//        SwingUtilities.invokeLater(this);
         parent.threadPool.execute(this);
     }
 
@@ -103,7 +106,7 @@ public class CharacterStatusDialog extends AbstractDialog implements ActionListe
             paidUntilField.setText(characterStatus.getPaidUntil() == null ? "unknown" : dateFormat.format(characterStatus.getPaidUntil()));
             createDateField.setText(characterStatus.getCreateDate() == null ? "unknown" : dateFormat.format(characterStatus.getCreateDate()));
         }
-        catch(URISyntaxException | IOException | ParserConfigurationException | SAXException | ControllerException ex)
+        catch(URISyntaxException | IOException | ParserConfigurationException | SAXException | ParseException | ControllerException ex)
         {
             showError("error", ex.getMessage());
             ex.printStackTrace(System.err);

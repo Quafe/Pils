@@ -8,6 +8,7 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
+import javax.swing.SwingUtilities;
 import org.pilsgeschwader.furryironman.view.icons.IconCache;
 import org.pilsgeschwader.furryironman.view.icons.IconNames;
 
@@ -76,9 +77,18 @@ public class AbstractDialog extends JDialog
         return result == JOptionPane.YES_OPTION;
     }
     
-    protected void showError(String title, String message)
+    protected void showError(final String title, final String message)
     {
-        JOptionPane.showMessageDialog(this, message, title, JOptionPane.ERROR_MESSAGE);
+        SwingUtilities.invokeLater(new Runnable()
+        {
+
+            @Override
+            public void run()
+            {
+                JOptionPane.showMessageDialog(AbstractDialog.this, message, title, JOptionPane.ERROR_MESSAGE);
+            }
+        });
+        
     }
     
     public void stopProgressBar(String message)

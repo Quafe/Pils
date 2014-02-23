@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.logging.Logger;
 import javax.xml.parsers.ParserConfigurationException;
 import org.pilsgeschwader.furryironman.controller.character.CharacterController;
@@ -49,12 +50,15 @@ public class Controller
     
     private static final String ITEM_DEF_FILE = "./items.csv";
     
+    private static final String XML_CACHE_DIR =  "./xml_cache/";
+    
     public Controller() throws URISyntaxException
     {
         model = new Model();
-        keyController = new ApiKeyController();
+        File xmlCacheDir = new File(XML_CACHE_DIR);
+        keyController = new ApiKeyController(xmlCacheDir);
         solarSystemController = new SolarSystemController();
-        characterController = new CharacterController();
+        characterController = new CharacterController(xmlCacheDir);
         itemDefinitionController = new ItemDefinitionController();
         characterImageController = new AbstractImageController(new File("./images/character"), new URI("http://image.eveonline.com/Character/"), AbstractImageController.IMAGE_TYPE_JPEG);        
         corpImageController = new AbstractImageController(new File("./images/corp"), new URI("http://image.eveonline.com/Corporation/"), AbstractImageController.IMAGE_TYPE_PNG);
@@ -65,7 +69,7 @@ public class Controller
         return model;
     }
 
-    public void init(ApplicationConfig config) throws IOException, ClassNotFoundException, SQLException, PropertyNotFoundException, URISyntaxException, ParserConfigurationException, SAXException, ControllerException
+    public void init(ApplicationConfig config) throws IOException, ClassNotFoundException, SQLException, PropertyNotFoundException, URISyntaxException, ParserConfigurationException, SAXException, ControllerException, ParseException
     {
         this.config = config;
         
@@ -82,12 +86,12 @@ public class Controller
         logger.info("done loading skilltree.");
     }
     
-    public void revalidateAllApiKeys() throws IOException, ControllerException, ParserConfigurationException, SAXException, URISyntaxException
+    public void revalidateAllApiKeys() throws IOException, ControllerException, ParserConfigurationException, SAXException, URISyntaxException, ParseException
     {
         keyController.validateAll(model.getStoredKeys());
     }
             
-    public EvECharacterSheet loadCharacterSheet(EvECharacter character) throws ControllerException, IOException, ParserConfigurationException, SAXException
+    public EvECharacterSheet loadCharacterSheet(EvECharacter character) throws ControllerException, IOException, ParserConfigurationException, SAXException, ParseException
     {
         return characterController.loadCharacterSheet(character, this);
     }
@@ -124,7 +128,7 @@ public class Controller
         logger.info("done reloading all character images..");
     }
     
-    public void reloadCharacterList() throws URISyntaxException, IOException, ParserConfigurationException, SAXException, ControllerException
+    public void reloadCharacterList() throws URISyntaxException, IOException, ParserConfigurationException, SAXException, ControllerException, ParseException
     {
         model.setCharacters(characterController.loadAllCharacters(model.getStoredKeys()));
     }

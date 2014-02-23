@@ -3,6 +3,7 @@ package org.pilsgeschwader.furryironman.controller.character;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -11,12 +12,11 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.parsers.ParserConfigurationException;
-import org.pilsgeschwader.furryironman.controller.common.AbstractController;
 import org.pilsgeschwader.furryironman.controller.common.Controller;
 import org.pilsgeschwader.furryironman.controller.common.ControllerException;
 import org.pilsgeschwader.furryironman.controller.common.InvalidApiKeyException;
 import org.pilsgeschwader.furryironman.controller.common.XMLApiRequest;
-import org.pilsgeschwader.furryironman.controller.common.XMLFileCache;
+import org.pilsgeschwader.furryironman.controller.common.XMLApiResponseCache;
 import org.pilsgeschwader.furryironman.model.eve.EvECharacter;
 import org.pilsgeschwader.furryironman.model.eve.EvECharacterStatus;
 import org.pilsgeschwader.furryironman.model.eve.ApiKey;
@@ -27,19 +27,20 @@ import org.xml.sax.SAXException;
  *
  * @author binarygamura
  */
-public class CharacterController extends AbstractController
+public class CharacterController extends XMLApiResponseCache
 {    
     private static final Logger logger = Logger.getLogger(CharacterController.class.getName());
     
     //TODO: make something useful
-    private final XMLFileCache charactersheetCache;
+//    private final XMLApiResponseCache charactersheetCache;
     
-    public CharacterController()
+    public CharacterController(File baseDir)
     {
-        charactersheetCache = new XMLFileCache(new File("./cache/charactersheets/"));
+        super(baseDir);
+//        charactersheetCache = new XMLApiResponseCache(new File("./cache/charactersheets/"));
     }
     
-    public EvECharacterStatus getCharacterStatus(EvECharacter character) throws URISyntaxException, IOException, ParserConfigurationException, SAXException, ControllerException
+    public EvECharacterStatus getCharacterStatus(EvECharacter character) throws URISyntaxException, IOException, ParserConfigurationException, SAXException, ControllerException, ParseException
     {
         XMLApiRequest request = new XMLApiRequest(XMLApiRequest.Target.ACCOUNT_STATUS);
         request.getArguments().put("characterID", String.valueOf(character.getCharacterID()));        
@@ -49,7 +50,7 @@ public class CharacterController extends AbstractController
         return handler.getStatus();
     }
     
-    public EvECharacterSheet loadCharacterSheet(EvECharacter character, Controller controller) throws ControllerException, IOException, ParserConfigurationException, SAXException
+    public EvECharacterSheet loadCharacterSheet(EvECharacter character, Controller controller) throws ControllerException, IOException, ParserConfigurationException, SAXException, ParseException
     {
         XMLApiRequest request = new XMLApiRequest(XMLApiRequest.Target.CHARACTER_SHEET);
         CharacterSheetHandler handler = new CharacterSheetHandler(controller);
@@ -59,7 +60,7 @@ public class CharacterController extends AbstractController
         return handler.getSheet();
     }
     
-    public List<EvECharacter> loadAllCharacters(List<ApiKey> keys) throws URISyntaxException, IOException, ParserConfigurationException, SAXException, ControllerException
+    public List<EvECharacter> loadAllCharacters(List<ApiKey> keys) throws URISyntaxException, IOException, ParserConfigurationException, SAXException, ControllerException, ParseException
     {
         List<EvECharacter> allCharacters = new ArrayList<>();
         long start = System.currentTimeMillis();

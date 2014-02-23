@@ -2,6 +2,7 @@ package org.pilsgeschwader.furryironman.controller.skills;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Date;
 import java.util.Map;
 import java.util.Stack;
 import java.util.logging.Logger;
@@ -120,5 +121,11 @@ public class SkillTreeImporter implements XMLApiResponseHandler
             bonus.setValue(Float.valueOf(values.get(XMLElements.Attributes.BONUSVALUE)));
             currentSkill.getBonis().add(bonus);
         }
+    }
+
+    @Override
+    public void onCachedUntil(Date date)
+    {
+        
     }
 }

@@ -6,6 +6,9 @@ import org.pilsgeschwader.furryironman.view.common.SimpleForm;
 import java.awt.BorderLayout;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.xml.parsers.ParserConfigurationException;
@@ -90,10 +93,10 @@ public class AddApiKeyDialog extends AbstractDialog implements Runnable
         {
             showError("key invalid", "please check your key. your data is invalid.");
         }
-        catch(IOException | URISyntaxException | ParserConfigurationException | SAXException ex)
+        catch(IOException | URISyntaxException | ParseException | ParserConfigurationException | SAXException ex)
         {
             showError("key invalid", "please check your key. your data is invalid.");
-        }
+        } 
         finally
         {
             buttonPanel.setEnabled(true);

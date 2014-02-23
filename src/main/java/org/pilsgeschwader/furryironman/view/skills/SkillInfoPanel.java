@@ -11,11 +11,13 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.Map;
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import org.pilsgeschwader.furryironman.model.eve.EvESkillBonus;
 import org.pilsgeschwader.furryironman.model.eve.EvESkillDefinition;
 import org.pilsgeschwader.furryironman.model.eve.EveSkillTreeRequirement;
+import org.pilsgeschwader.furryironman.view.common.Util;
 
 /**
  *
@@ -58,9 +60,10 @@ public class SkillInfoPanel extends JPanel
         attributesPanel.removeAll();
         for(EvESkillBonus bonus : definition.getBonis())
         {
-            attributesPanel.add(new JLabel(bonus.getType().name()));
+            attributesPanel.add(new JLabel("<html><ul><li>"+Util.getEveSkillBonusName(bonus)));
         }
-        revalidate();
+        attributesPanel.repaint();
+        requiredSkillsPanel.repaint();
     }
     
     private void init()
@@ -71,24 +74,26 @@ public class SkillInfoPanel extends JPanel
         titleLabel.setPreferredSize(new Dimension(10, 60));
         descriptionLabel = new JLabel();
         descriptionLabel.setBorder(BorderFactory.createTitledBorder("description:"));
-        descriptionLabel.setMinimumSize(new Dimension(10, 80));
-        descriptionLabel.setPreferredSize(new Dimension(10, 80));
+        descriptionLabel.setMinimumSize(new Dimension(10, 100));
+        descriptionLabel.setPreferredSize(new Dimension(10, 100));
         
         JPanel topWrapper = new JPanel(new BorderLayout());
         topWrapper.add(titleLabel, BorderLayout.NORTH);
         topWrapper.add(descriptionLabel, BorderLayout.CENTER);
         
-        requiredSkillsPanel = new JPanel(new GridLayout(0, 1));
+        requiredSkillsPanel = new JPanel();
+        requiredSkillsPanel.setLayout(new BoxLayout(requiredSkillsPanel, BoxLayout.Y_AXIS));
         requiredSkillsPanel.setBorder(BorderFactory.createTitledBorder("requirements:"));
         JPanel requiredSkillsPanelWrapper = new JPanel(new BorderLayout());
-        requiredSkillsPanelWrapper.add(requiredSkillsPanel, BorderLayout.NORTH);
+        requiredSkillsPanelWrapper.add(requiredSkillsPanel, BorderLayout.CENTER);
         
-        attributesPanel = new JPanel(new GridLayout(0, 1));
+        attributesPanel = new JPanel();
+        attributesPanel.setLayout(new BoxLayout(attributesPanel, BoxLayout.Y_AXIS));
         attributesPanel.setBorder(BorderFactory.createTitledBorder("attributes:"));
         JPanel attributesPanelWrapper = new JPanel(new BorderLayout());
-        attributesPanelWrapper.add(attributesPanel, BorderLayout.NORTH);
+        attributesPanelWrapper.add(attributesPanel, BorderLayout.CENTER);
         
-        JPanel centerpanel = new JPanel(new GridLayout(1, 2));
+        JPanel centerpanel = new JPanel(new GridLayout(0, 2));
         centerpanel.add(requiredSkillsPanelWrapper);
         centerpanel.add(attributesPanelWrapper);
         

@@ -2,22 +2,24 @@ package org.pilsgeschwader.furryironman.controller.apikey;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.URISyntaxException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.parsers.ParserConfigurationException;
-import org.pilsgeschwader.furryironman.controller.common.AbstractController;
 import org.pilsgeschwader.furryironman.controller.common.ControllerException;
 import org.pilsgeschwader.furryironman.controller.common.InvalidApiKeyException;
 import org.pilsgeschwader.furryironman.controller.common.XMLApiRequest;
+import org.pilsgeschwader.furryironman.controller.common.XMLApiResponseCache;
 import org.pilsgeschwader.furryironman.model.eve.ApiKey;
 import org.xml.sax.SAXException;
 
@@ -25,18 +27,18 @@ import org.xml.sax.SAXException;
  *
  * @author binarygamura
  */
-public class ApiKeyController extends AbstractController
+public class ApiKeyController extends XMLApiResponseCache
 {
     private static final String DELIMITER = ";";
     
     private static final Logger logger = Logger.getLogger(ApiKeyController.class.getName());
     
-    public ApiKeyController()
+    public ApiKeyController(File baseDir)
     {
-        
+        super(baseDir);
     }
     
-    public void validate(ApiKey key) throws IOException, ControllerException, ParserConfigurationException, SAXException, URISyntaxException
+    public void validate(ApiKey key) throws IOException, ControllerException, ParserConfigurationException, SAXException, URISyntaxException, ParseException
     {
         logger.log(Level.INFO, "validating key {0}", key);
         XMLApiRequest request = new XMLApiRequest(XMLApiRequest.Target.API_KEY_INFO);
@@ -65,7 +67,7 @@ public class ApiKeyController extends AbstractController
     
     public List<ApiKey> load(InputStream stream) throws IOException
     {
-        ApiKey key = null;
+        ApiKey key;
         List<ApiKey> storedKeys = new ArrayList<>();
         try(BufferedReader reader = new BufferedReader(new InputStreamReader(stream)))
         {
@@ -93,11 +95,10 @@ public class ApiKeyController extends AbstractController
         return storedKeys;
     }
     
-    public void validateAll(List<ApiKey> keys) throws IOException, ControllerException, ParserConfigurationException, SAXException, URISyntaxException
+    public void validateAll(List<ApiKey> keys) throws IOException, ControllerException, ParserConfigurationException, SAXException, URISyntaxException, ParseException
     {
         Iterator<ApiKey> iterator = keys.iterator();
         ApiKey key;
-//        for(ApiKey key : keys)
         while(iterator.hasNext())
         {
             key = iterator.next();
@@ -123,7 +124,6 @@ public class ApiKeyController extends AbstractController
             key.setKeyId(Integer.valueOf(splitted[0]));
             key.setVerificationString(splitted[1]);
         }
-        
         return key;
     }       
 }

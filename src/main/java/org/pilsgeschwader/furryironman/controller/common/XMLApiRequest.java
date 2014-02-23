@@ -3,6 +3,8 @@ package org.pilsgeschwader.furryironman.controller.common;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +28,22 @@ public class XMLApiRequest
     {
         this.target = target;
         arguments = new HashMap<>();
+    }
+    
+    public String createCacheKey()
+    {
+        StringBuilder key = new StringBuilder(target.name()).append("_");
+        List<String> argmuentKeys = new ArrayList<>(arguments.keySet());
+        Collections.sort(argmuentKeys);
+        for(String argumentKey : argmuentKeys)
+        {
+            key.append(argumentKey).append("_").append(arguments.get(argumentKey)).append("_");
+        }
+        if(this.key != null)
+        {
+            key.append(this.key.getKeyId());
+        }
+        return key.toString();
     }
     
     public XMLApiResponseHandler getXmlHandler()
@@ -152,4 +170,6 @@ public class XMLApiRequest
             return result;
         }
     }
+    
+    
 }

@@ -3,6 +3,7 @@ package org.pilsgeschwader.furryironman.controller.character;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 import java.util.Stack;
 import java.util.logging.Level;
@@ -41,6 +42,12 @@ public class CharacterSheetHandler implements XMLApiResponseHandler
         this.controller = controller;
         state = State.CONTENT;
         format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    }
+    
+    @Override
+    public void onCachedUntil(Date date)
+    {
+        
     }
     
     @Override

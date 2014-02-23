@@ -3,6 +3,7 @@ package org.pilsgeschwader.furryironman.controller.apikey;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 import java.util.Stack;
 import java.util.logging.Logger;
@@ -57,6 +58,12 @@ class ApiKeyHandler implements XMLApiResponseHandler
 
     @Override
     public void onUnknownElementEnd(String element, String content)
+    {
+        
+    }
+
+    @Override
+    public void onCachedUntil(Date date)
     {
         
     }

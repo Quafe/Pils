@@ -2,11 +2,17 @@ package org.pilsgeschwader.furryironman.controller.common;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Stack;
+import java.util.TimeZone;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -32,10 +38,21 @@ public class XMLApiResponseReader extends DefaultHandler
     
     private final Stack<String> rowsets;
     
+    private final DateFormat dateFormat;
+    
+    private Date cachedUntil;
+    
     public XMLApiResponseReader(XMLApiResponseHandler handler)
     {
         this.handler = handler;
         rowsets = new Stack<>();
+        dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+    }
+
+    public Date getCachedUntil()
+    {
+        return cachedUntil;
     }
     
     public void read(InputStream stream) throws ParserConfigurationException, SAXException, IOException
@@ -53,19 +70,32 @@ public class XMLApiResponseReader extends DefaultHandler
     @Override
     public void endElement(String uri, String localName, String qName) throws SAXException
     {
-        qName = qName.toLowerCase();
-        if(qName.equals(XMLElements.ROWSET))
+        try
         {
-            rowsets.pop();
+            qName = qName.toLowerCase();
+            if(qName.equals("cacheduntil"))
+            {
+                cachedUntil = dateFormat.parse(textBuffer.toString().trim());
+                handler.onCachedUntil(cachedUntil);
+            }
+            else if(qName.equals(XMLElements.ROWSET))
+            {
+                rowsets.pop();
+            }
+            else if(!ignorableTags.contains(qName) && !qName.equals(XMLElements.ROW) && !qName.equals(XMLElements.ROWSET))
+            {
+                handler.onUnknownElementEnd(qName, textBuffer.toString());
+
+            }
+            if(textBuffer.length() > 0)
+            {
+                textBuffer = new StringBuilder();
+            }
         }
-        else if(!ignorableTags.contains(qName) && !qName.equals(XMLElements.ROW) && !qName.equals(XMLElements.ROWSET))
+        catch(ParseException ex)
         {
-            handler.onUnknownElementEnd(qName, textBuffer.toString());
-            
-        }
-        if(textBuffer.length() > 0)
-        {
-            textBuffer = new StringBuilder();
+            logger.log(Level.SEVERE, "error while parsing cached until element from \"{0}\".", textBuffer.toString());
+            ex.printStackTrace(System.err);
         }
     }
     
