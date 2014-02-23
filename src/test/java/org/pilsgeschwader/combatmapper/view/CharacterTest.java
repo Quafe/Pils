@@ -6,6 +6,7 @@
 
 package org.pilsgeschwader.combatmapper.view;
 
+import java.io.File;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -23,7 +24,7 @@ public class CharacterTest
     @BeforeClass
     public static void init()
     {
-        controller = new CharacterController();
+        controller = new CharacterController(new File("./xml_cache"));
     }
     
     @Test

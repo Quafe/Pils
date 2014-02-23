@@ -1,8 +1,10 @@
 package org.pilsgeschwader.combatmapper.view;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.xml.parsers.ParserConfigurationException;
@@ -30,7 +32,7 @@ public class KeyTest
     @BeforeClass
     public static void initTest()
     {
-         controller = new ApiKeyController();
+         controller = new ApiKeyController(new File("./xml_cache"));
          format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     }
     
@@ -47,7 +49,7 @@ public class KeyTest
     
     
     @Test(expected = ControllerException.class)
-    public void testParseInvalidApiKeyInfo() throws IOException, ControllerException, ParserConfigurationException, SAXException, URISyntaxException
+    public void testParseInvalidApiKeyInfo() throws IOException, ControllerException, ParserConfigurationException, SAXException, URISyntaxException, ParseException
     {
         long start = System.currentTimeMillis();
         ApiKey validKey = new ApiKey(2656713, "j8webTIcKK8WD6gJOqw3EIah57HNBUEVCg5HbcEvzdKwW8uc4JaUz8bUHhsrFibRdd");        
@@ -63,7 +65,7 @@ public class KeyTest
     
     @Test
     @Ignore
-    public void testParseValidApiKeyInfo() throws IOException, ControllerException, ParserConfigurationException, SAXException, URISyntaxException
+    public void testParseValidApiKeyInfo() throws IOException, ControllerException, ParserConfigurationException, SAXException, URISyntaxException, ParseException
     {
         long start = System.currentTimeMillis();
         ApiKey validKey = new ApiKey(2656713, "j8webTIcKK8WD6gJOqw3EIah57HNBUEVCg5HbcEvzdKwW8uc4JaUz8bUHhsrFibR");        
