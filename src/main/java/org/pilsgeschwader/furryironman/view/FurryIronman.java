@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Level;
@@ -156,7 +157,7 @@ public class FurryIronman extends JFrame implements Runnable
         setJMenuBar(menuBar);
     }
     
-    private FurryIronman init() throws IOException, ClassNotFoundException, SQLException, PropertyNotFoundException, URISyntaxException, ParserConfigurationException, SAXException, ControllerException
+    private FurryIronman init() throws IOException, ClassNotFoundException, SQLException, PropertyNotFoundException, URISyntaxException, ParserConfigurationException, SAXException, ControllerException, ParseException
     {
         ApplicationConfig config = new ApplicationConfig();
         controller.init(config.load(new File("./config.properties")));
@@ -290,7 +291,7 @@ public class FurryIronman extends JFrame implements Runnable
                     logger.severe("unable to load dependency. missing jdbc driver?");
                     ex.printStackTrace(System.err);
                 }
-                catch(IOException | SQLException | URISyntaxException | ParserConfigurationException | SAXException | ControllerException ex)
+                catch(ParseException | IOException | SQLException | URISyntaxException | ParserConfigurationException | SAXException | ControllerException ex)
                 {
                     logger.log(Level.SEVERE, "critical error: {0}", ex.getMessage());
                     ex.printStackTrace(System.err);
@@ -335,7 +336,7 @@ public class FurryIronman extends JFrame implements Runnable
             
             
         }
-        catch(URISyntaxException | IOException | ParserConfigurationException | SAXException | ControllerException ex)
+        catch(ParseException | URISyntaxException | IOException | ParserConfigurationException | SAXException | ControllerException ex)
         {
             ex.printStackTrace(System.err);
             progressBar.setString("error");

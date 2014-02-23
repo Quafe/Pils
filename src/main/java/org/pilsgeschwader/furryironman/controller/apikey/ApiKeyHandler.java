@@ -33,7 +33,7 @@ class ApiKeyHandler implements XMLApiResponseHandler
             if(element.equals(XMLElements.KEY))
             {
                 String dateValue = values.get(XMLElements.EXPIRES);
-                key.setAccessMask(Integer.valueOf(values.get(XMLElements.ACCESSMASK)));
+                key.setAccessMask(Integer.parseInt(values.get(XMLElements.ACCESSMASK)));
                 key.setValidTo(dateFormat.parse(dateValue == null || dateValue.isEmpty() ? "2100-01-01 00:00:00" : dateValue));
             }
         }

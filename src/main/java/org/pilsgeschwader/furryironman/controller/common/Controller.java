@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.SQLException;
@@ -73,16 +75,28 @@ public class Controller
     {
         this.config = config;
         
-        model.setStoredKeys(keyController.load(new FileInputStream(KEY_STORE_FILE)));
-        logger.info("done loading api keys.");
-        model.setSolarSystems(solarSystemController.readSystems(new FileInputStream(SOLAR_SYSTEMS_FILE)));
-        logger.info("done loading solar systems.");
+        try(InputStream stream = new FileInputStream(KEY_STORE_FILE))
+        {
+            model.setStoredKeys(keyController.load(stream));
+            logger.info("done loading api keys.");
+        }
+        try(InputStream stream = new FileInputStream(SOLAR_SYSTEMS_FILE))
+        {
+            model.setSolarSystems(solarSystemController.readSystems(stream));
+            logger.info("done loading solar systems.");
+        }
         model.setCharacters(characterController.loadAllCharacters(model.getStoredKeys()));        
         logger.info("done loading characters.");
-        model.setItemDefinitions(itemDefinitionController.loadItems(new FileInputStream(ITEM_DEF_FILE)));
-        logger.info("done loading utems.");
+        try(InputStream stream = new FileInputStream(ITEM_DEF_FILE))
+        {
+            model.setItemDefinitions(itemDefinitionController.loadItems(stream));
+            logger.info("done loading utems.");
+        }
         SkillTreeImporter importer = new SkillTreeImporter();
-        model.setSkilltree(importer.loadSkilltree(new FileInputStream("./skills_2014_02_10.xml")));
+        try(InputStream stream = new FileInputStream("./skills_2014_02_10.xml"))
+        {
+            model.setSkilltree(importer.loadSkilltree(stream));
+        }
         logger.info("done loading skilltree.");
     }
     
@@ -135,9 +149,9 @@ public class Controller
     
     public void shutDown()
     {        
-        try
+        try(OutputStream stream = new FileOutputStream(KEY_STORE_FILE))
         {
-            keyController.save(model.getStoredKeys(), new FileOutputStream(KEY_STORE_FILE));
+            keyController.save(model.getStoredKeys(), stream);
         }
         catch(IOException ex){}
         try

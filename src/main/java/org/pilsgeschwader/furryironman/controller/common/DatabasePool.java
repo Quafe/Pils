@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Logger;
 import org.apache.commons.dbcp.ConnectionFactory;
 import org.apache.commons.dbcp.DriverManagerConnectionFactory;
 import org.apache.commons.dbcp.PoolableConnection;
@@ -30,6 +31,8 @@ public class DatabasePool
     
     public static final String DB_DRIVER_NAME = "com.mysql.jdbc.Driver";
     
+    private static final Logger logger = Logger.getLogger(DatabasePool.class.getName());
+    
     public DatabasePool()
     {
         
@@ -45,16 +48,21 @@ public class DatabasePool
         try
         {
             PoolingDriver driver = (PoolingDriver) DriverManager.getDriver("jdbc:apache:commons:dbcp:");
-            driver.closePool(POOL_NAME);
+            if(driver != null)
+            {
+                driver.closePool(POOL_NAME);
+            }
         }
-        catch(SQLException ex){}
+        catch(SQLException ex)
+        {
+            logger.warning("error while closing database pool.");
+        }
     }
     
     public void testSQL() throws SQLException
     {
-        try(Connection connection = getConnection(); Statement statement = connection.createStatement())
+        try(Connection connection = getConnection(); Statement statement = connection.createStatement(); ResultSet result = statement.executeQuery("SELECT 1 + 1"))
         {
-            ResultSet result = statement.executeQuery("SELECT 1 + 1");
         }
     }
     

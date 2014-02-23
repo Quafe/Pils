@@ -85,7 +85,7 @@ public class EvESkillTree implements Iterable<EvESkillTreeGroup>
         return groups.iterator();
     }
 
-    private class GroupComparator implements Comparator<EvESkillTreeGroup>
+    private static class GroupComparator implements Comparator<EvESkillTreeGroup>
     {
         private final Collator collator;
         

@@ -18,6 +18,7 @@ import java.util.logging.Logger;
 import javax.xml.parsers.ParserConfigurationException;
 import org.pilsgeschwader.furryironman.controller.common.ControllerException;
 import org.pilsgeschwader.furryironman.controller.common.InvalidApiKeyException;
+import org.pilsgeschwader.furryironman.controller.common.Util;
 import org.pilsgeschwader.furryironman.controller.common.XMLApiRequest;
 import org.pilsgeschwader.furryironman.controller.common.XMLApiResponseCache;
 import org.pilsgeschwader.furryironman.model.eve.ApiKey;
@@ -50,7 +51,7 @@ public class ApiKeyController extends XMLApiResponseCache
     {
         if(storedKeys != null)
         {
-            try(BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(stream)))
+            try(BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(stream, Util.createDefaultFileCharset())))
             {
                 for(ApiKey key : storedKeys)
                 {
@@ -69,7 +70,7 @@ public class ApiKeyController extends XMLApiResponseCache
     {
         ApiKey key;
         List<ApiKey> storedKeys = new ArrayList<>();
-        try(BufferedReader reader = new BufferedReader(new InputStreamReader(stream)))
+        try(BufferedReader reader = new BufferedReader(new InputStreamReader(stream, Util.createDefaultFileCharset())))
         {
             String line;
             int counter = 0;
@@ -121,7 +122,7 @@ public class ApiKeyController extends XMLApiResponseCache
         if(splitted.length == 2 && !splitted[0].isEmpty() && !splitted[1].isEmpty())
         {
             key = new ApiKey();
-            key.setKeyId(Integer.valueOf(splitted[0]));
+            key.setKeyId(Integer.parseInt(splitted[0]));
             key.setVerificationString(splitted[1]);
         }
         return key;

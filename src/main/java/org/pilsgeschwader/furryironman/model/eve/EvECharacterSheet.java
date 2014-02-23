@@ -191,12 +191,12 @@ public class EvECharacterSheet
     
     public Date getDateOfBirth()
     {
-        return dateOfBirth;
+        return dateOfBirth == null ? null : new Date(dateOfBirth.getTime());
     }
 
     public void setDateOfBirth(Date dateOfBirth)
     {
-        this.dateOfBirth = dateOfBirth;
+        this.dateOfBirth = new Date(dateOfBirth == null ? 0l : dateOfBirth.getTime());
     }
     
     public List<String> getCorpRoles()

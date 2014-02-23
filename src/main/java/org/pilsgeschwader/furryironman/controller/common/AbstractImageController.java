@@ -23,7 +23,7 @@ import org.apache.http.util.EntityUtils;
  *
  * @author binarygamura
  */
-public class AbstractImageController //extends AbstractController
+public class AbstractImageController 
 {
     private final File imageBaseDir;
     
@@ -93,9 +93,15 @@ public class AbstractImageController //extends AbstractController
                 image = requestImage(id, size);
                 if(image != null)
                 {
-                    targetFile.createNewFile();
-                    ImageIO.write(image, expectedImageType, targetFile);
-                    imageCache.put(key, image);
+                    if(targetFile.createNewFile())
+                    {
+                        ImageIO.write(image, expectedImageType, targetFile);
+                        imageCache.put(key, image);
+                    }
+                    else
+                    {
+                        logger.log(Level.WARNING, "unable to create file \"{0}\".", targetFile.getAbsolutePath());
+                    }
                 }
                 else
                 {

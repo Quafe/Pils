@@ -60,13 +60,13 @@ public class CharacterHandler implements XMLApiResponseHandler
     public void onRow(Map<String, String> values, Stack<String> rowsets)
     {
         
-        Integer characterId = Integer.valueOf(values.get(XMLElements.CHARACTERID));
+        Integer characterId = Integer.parseInt(values.get(XMLElements.CHARACTERID));
         if(!knownCharacters.contains(characterId))
         {
             EvECharacter character = new EvECharacter();
             character.setCharacterID(characterId);
             character.setCharacterName(values.get(XMLElements.NAME));
-            character.setCorporationID(Integer.valueOf(values.get(XMLElements.CORPORATIONID)));
+            character.setCorporationID(Integer.parseInt(values.get(XMLElements.CORPORATIONID)));
             character.setCorporationName(values.get(XMLElements.CORPORATIONNAME));
             character.addKey(apiKey);
             characters.add(character);

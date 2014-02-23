@@ -43,12 +43,15 @@ public class ApplicationConfig
         {
             props.setProperty(key, properties.get(key));
         }
-        props.store(new FileOutputStream(file), "");
+        try(FileOutputStream stream = new FileOutputStream(file))
+        {
+            props.store(stream, "");
+        }
     }
     
     public int getPropertyAsInt(String key) throws PropertyNotFoundException
     {
-        return Integer.valueOf(getPropertyAsString(key));
+        return Integer.parseInt(getPropertyAsString(key));
     }
     
     public String getPropertyAsString(String key) throws PropertyNotFoundException
@@ -76,11 +79,14 @@ public class ApplicationConfig
         this.file = file;
         properties.clear();
         Properties props = new Properties();
-        props.load(new FileInputStream(file));
-        for(Object key : props.keySet())
+        try(FileInputStream stream = new FileInputStream(file))
         {
-            temp = key.toString();
-            properties.put(temp, props.getProperty(temp));
+            props.load(stream);
+            for(Object key : props.keySet())
+            {
+                temp = key.toString();
+                properties.put(temp, props.getProperty(temp));
+            }
         }
         return this;
     }

@@ -83,7 +83,7 @@ public class CharacterSheetHandler implements XMLApiResponseHandler
                 break;
             case "augmentatorvalue":
                 EvEAugumentor augomentor = new EvEAugumentor();
-                augomentor.setImplantValue(Integer.valueOf(content));
+                augomentor.setImplantValue(Integer.parseInt(content));
                 augomentor.setImplantName(lastAugmentorName);
                 if(lastAugmentorType != null)
                 {
@@ -116,31 +116,31 @@ public class CharacterSheetHandler implements XMLApiResponseHandler
                 }
                 break;
             case "intelligence":
-                sheet.setIntelligence(Integer.valueOf(content));
+                sheet.setIntelligence(Integer.parseInt(content));
                 break;
             case "memory":
-                sheet.setMemory(Integer.valueOf(content));
+                sheet.setMemory(Integer.parseInt(content));
                 break;
             case "charisma":
-                sheet.setCharisma(Integer.valueOf(content));
+                sheet.setCharisma(Integer.parseInt(content));
                 break;
             case "perception":
-                sheet.setPerception(Integer.valueOf(content));
+                sheet.setPerception(Integer.parseInt(content));
                 break;
             case "willpower":
-                sheet.setWillpower(Integer.valueOf(content));
+                sheet.setWillpower(Integer.parseInt(content));
                 break;
             case "corporationname":
                 sheet.setCorporationName(content);
                 break;
             case "corporationid":
-                sheet.setCorporationID(Integer.valueOf(content));
+                sheet.setCorporationID(Integer.parseInt(content));
                 break;
             case "name":                
                 sheet.setName(content);
                 break;
             case "characterid":
-                sheet.setCharacterID(Integer.valueOf(content));
+                sheet.setCharacterID(Integer.parseInt(content));
                 break;
             case "dob":
                 try
@@ -162,10 +162,10 @@ public class CharacterSheetHandler implements XMLApiResponseHandler
                 sheet.setCloneName(content);
                 break;
             case "cloneskillpoints":
-                sheet.setCloneSkillPoints(Integer.valueOf(content));
+                sheet.setCloneSkillPoints(Integer.parseInt(content));
                 break;
             case "balance":
-                sheet.setBalance(Float.valueOf(content));
+                sheet.setBalance(Float.parseFloat(content));
                 break;  
             case "ancestry":                
                 sheet.setAncestry(content);
@@ -216,7 +216,7 @@ public class CharacterSheetHandler implements XMLApiResponseHandler
         switch(state)
         {
             case IN_ACCOUNTS:
-                sheet.setBalance(Float.valueOf(values.get("balance")));
+                sheet.setBalance(Float.parseFloat(values.get("balance")));
                 break;
             case IN_CERT:
                 break;
@@ -231,9 +231,9 @@ public class CharacterSheetHandler implements XMLApiResponseHandler
                 break;
             case IN_SKILLS:
                 EvESkill skill = new EvESkill();
-                skill.setTypeId(Integer.valueOf(values.get("typeid")));
-                skill.setLevel(Integer.valueOf(values.get("level")));
-                skill.setSkillpoints(Integer.valueOf(values.get("skillpoints")));
+                skill.setTypeId(Integer.parseInt(values.get("typeid")));
+                skill.setLevel(Integer.parseInt(values.get("level")));
+                skill.setSkillpoints(Integer.parseInt(values.get("skillpoints")));
                 skill.setItemDefinition(controller.getModel().getItemDefinitionById(skill.getTypeId()));
                 sheet.addSkill(skill);
                 break;                

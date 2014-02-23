@@ -1,5 +1,6 @@
 package org.pilsgeschwader.furryironman.view.common;
 
+import java.nio.charset.Charset;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
@@ -13,6 +14,7 @@ import org.pilsgeschwader.furryironman.model.eve.EvESkillBonus;
  */
 public class Util 
 {
+    
     public static NumberFormat getIskNumberFormatter()
     {
         DecimalFormat format = (DecimalFormat) NumberFormat.getCurrencyInstance();

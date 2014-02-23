@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import org.pilsgeschwader.furryironman.controller.common.Util;
 import org.pilsgeschwader.furryironman.model.eve.SolarSystem;
 
 /**
@@ -32,10 +33,9 @@ public class SystemGenerator
     public List<SolarSystem> fetchSolarSystems() throws SQLException
     {
         List<SolarSystem> solarSystems = new ArrayList<>();
-        try(Statement statement = connection.createStatement())
+        String query = "SELECT * FROM mapsolarsystems ORDER BY solarSystemName";
+        try(Statement statement = connection.createStatement(); ResultSet result = statement.executeQuery(query))
         {
-            String query = "SELECT * FROM mapsolarsystems ORDER BY solarSystemName";
-            ResultSet result = statement.executeQuery(query);
             while(result.next())
             {
                 fetchSolarSystem(solarSystems, result);
@@ -63,7 +63,7 @@ public class SystemGenerator
     
     public void writeSolarSystemsToFile(File outputFile, List<SolarSystem> solarSystems) throws FileNotFoundException, IOException
     {
-        try(BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputFile))))
+        try(BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputFile), Util.createDefaultFileCharset())))
         {
             for(SolarSystem system : solarSystems)
             {

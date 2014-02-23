@@ -52,7 +52,7 @@ public class XMLApiResponseReader extends DefaultHandler
 
     public Date getCachedUntil()
     {
-        return cachedUntil;
+        return cachedUntil == null ? null : new Date(cachedUntil.getTime());
     }
     
     public void read(InputStream stream) throws ParserConfigurationException, SAXException, IOException

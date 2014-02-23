@@ -66,10 +66,10 @@ public class CharacterStatusHandler implements XMLApiResponseHandler
                     status.setCreateDate(format.parse(content));
                     break;
                 case "logoncount":
-                    status.setLogonCount(Integer.valueOf(content));
+                    status.setLogonCount(Integer.parseInt(content));
                     break;
                 case "logonminutes":
-                    status.setLoginMinutes(Integer.valueOf(content));
+                    status.setLoginMinutes(Integer.parseInt(content));
                     break;
             }
         }

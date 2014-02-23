@@ -39,12 +39,12 @@ public class ApiKey
 
     public Date getValidTo()
     {
-        return validTo;
+        return validTo == null ? null : new Date(validTo.getTime());
     }
 
     public void setValidTo(Date validTo)
     {
-        this.validTo = validTo;
+        this.validTo = new Date(validTo == null ? 0l: validTo.getTime());
     }
     
     public int getKeyId()

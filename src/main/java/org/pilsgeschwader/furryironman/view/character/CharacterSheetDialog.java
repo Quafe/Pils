@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JButton;
@@ -122,7 +123,7 @@ public class CharacterSheetDialog extends AbstractDialog implements Runnable
             }
             stopProgressBar("done loading character sheet");
         }
-        catch (ControllerException | SAXException  | ParserConfigurationException | IOException ex)
+        catch (ControllerException | SAXException  | ParserConfigurationException | ParseException | IOException ex)
         {
             showError("error", ex.getMessage());
             ex.printStackTrace(System.err);

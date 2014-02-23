@@ -36,7 +36,6 @@ public class SkillTreeImporter implements XMLApiResponseHandler
     
     public EvESkillTree loadSkilltree(InputStream stream) throws ParserConfigurationException, SAXException, IOException
     {
-
         SAXParser parser = SAXParserFactory.newInstance().newSAXParser();
         skilltree = new EvESkillTree();
         currentGroup = null;
@@ -46,8 +45,7 @@ public class SkillTreeImporter implements XMLApiResponseHandler
         skilltree.sortGroups();
         skilltree.createIndex();
         return skilltree;
-    }
-    
+    }    
 
     @Override
     public void onUnknownElementStart(String element, Map<String, String> values)
@@ -61,7 +59,7 @@ public class SkillTreeImporter implements XMLApiResponseHandler
         switch(element)
         {
             case "rank":
-                currentSkill.setRank(Integer.valueOf(content.trim()));
+                currentSkill.setRank(Integer.parseInt(content.trim()));
                 break;
             case "description":
                 currentSkill.setDescription(content);
@@ -88,15 +86,15 @@ public class SkillTreeImporter implements XMLApiResponseHandler
         if(topElement.equals(XMLElements.Rowsets.SKILLGROUPS))
         {
             String groupname = values.get(XMLElements.Attributes.GROUPNAME);
-            int groupId = Integer.valueOf(values.get(XMLElements.Attributes.GROUPID));
+            int groupId = Integer.parseInt(values.get(XMLElements.Attributes.GROUPID));
             currentGroup = skilltree.createGroup(groupId, groupname);
         }
         else if(topElement.equals(XMLElements.Rowsets.SKILLS))
         {            
             currentSkill = new EvESkillDefinition();
             currentSkill.setTypeName(values.get(XMLElements.Attributes.TYPENAME));
-            currentSkill.setGroupID(Integer.valueOf(values.get(XMLElements.Attributes.GROUPID)));
-            currentSkill.setTypeID(Integer.valueOf(values.get(XMLElements.Attributes.TYPEID)));
+            currentSkill.setGroupID(Integer.parseInt(values.get(XMLElements.Attributes.GROUPID)));
+            currentSkill.setTypeID(Integer.parseInt(values.get(XMLElements.Attributes.TYPEID)));
             currentSkill.setPublished(values.get(XMLElements.Attributes.PUBLISHED).equals("1"));
             
             
@@ -104,8 +102,8 @@ public class SkillTreeImporter implements XMLApiResponseHandler
         }
         else if(topElement.equals(XMLElements.Rowsets.REQUIREDSKILLS))
         {
-            int typeId = Integer.valueOf(values.get(XMLElements.Attributes.TYPEID));
-            int skillLevel = Integer.valueOf(values.get(XMLElements.Attributes.SKILLLEVEL));
+            int typeId = Integer.parseInt(values.get(XMLElements.Attributes.TYPEID));
+            int skillLevel = Integer.parseInt(values.get(XMLElements.Attributes.SKILLLEVEL));
             
             
             EveSkillTreeRequirement requirement = new EveSkillTreeRequirement();
@@ -118,7 +116,7 @@ public class SkillTreeImporter implements XMLApiResponseHandler
         {
             EvESkillBonus bonus = new EvESkillBonus();
             bonus.setType(EvESkillBonus.Type.fromString(values.get(XMLElements.Attributes.BONUSTYPE)));
-            bonus.setValue(Float.valueOf(values.get(XMLElements.Attributes.BONUSVALUE)));
+            bonus.setValue(Float.parseFloat(values.get(XMLElements.Attributes.BONUSVALUE)));
             currentSkill.getBonis().add(bonus);
         }
     }

@@ -18,22 +18,22 @@ public class EvECharacterStatus
 
     public Date getPaidUntil()
     {
-        return paidUntil;
+        return paidUntil == null ? null : new Date(paidUntil.getTime());
     }
 
     public void setPaidUntil(Date paidUntil)
     {
-        this.paidUntil = paidUntil;
+        this.paidUntil = new Date(paidUntil == null ? 0l : paidUntil.getTime());
     }
 
     public Date getCreateDate()
     {
-        return createDate;
+        return createDate == null ? null : new Date(createDate.getTime());
     }
 
     public void setCreateDate(Date createDate)
     {
-        this.createDate = createDate;
+        this.createDate = new Date(createDate == null ? 0l : createDate.getTime());
     }
 
     public int getLogonCount()

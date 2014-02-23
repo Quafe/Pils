@@ -1,11 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package org.pilsgeschwader.furryironman.controller.common;
 
+import java.nio.charset.Charset;
 import java.util.Map;
 
 /**
@@ -14,6 +9,12 @@ import java.util.Map;
  */
 public class Util 
 {
+    
+    public static Charset createDefaultFileCharset()
+    {
+        return Charset.forName("UTF-8");
+    }
+    
     public static void buildDefaultParameters(String vCode, int keyId, Map<String, String> map)
     {
         map.put("vCode", vCode);

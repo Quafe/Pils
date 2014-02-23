@@ -67,8 +67,8 @@ public class XMLApiResponseCache
     public void makeApiXMLRequest(XMLApiRequest request, ApiKey apiKey) throws ParseException, FileNotFoundException, IOException, ControllerException, ParserConfigurationException, SAXException
     {
         cacheUses++;
-        HttpEntity entity = null;
         File tempFile = null;
+        File cacheFile;
         InputStream stream = null;
         
         if(apiKey != null)
@@ -80,26 +80,34 @@ public class XMLApiResponseCache
         //does an cache entry exist?
         String cacheKey = request.createCacheKey();
         String[] matches = basedir.list(new XMLApiResponseCacheFileFilter(cacheKey));
-        assert matches.length == 1;
         //do we have an match?
         if(matches.length > 0)
         {
             //is it still valid?
-            File cacheFile = new File(basedir, matches[0]);
-            Date cachedUntil = getExpireDate(cacheFile);
-            //cache entry too old?
-            if(cachedUntil.before(new Date()))
+            for(String match : matches)
             {
-                //we can delete it...
-                cacheFile.delete();
-                SimpleDateFormat df = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
-                logger.log(Level.INFO, "cache hit, but file is to outdated. ({0} > {1}).", new Object[]{df.format(cachedUntil), df.format(new Date())});
-            }
-            else //valid cache entry!! YAY!!
-            {
-                stream = new FileInputStream(cacheFile);
-                logger.info("great!! xml cache hit!!");
-                cacheHits++;
+                cacheFile = new File(basedir, match);
+                Date cachedUntil = getExpireDate(cacheFile);
+                //cache entry too old?
+                if(cachedUntil.before(new Date()))
+                {
+                    //we can delete it...
+                    if(!cacheFile.delete())
+                    {
+                        logger.log(Level.WARNING, "unable to remove outdated cache file \"{0}\".", cacheFile.getName());
+                    }
+                    //TODO: remove dateformat stuff... just for debugging...
+                    SimpleDateFormat df = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
+                    logger.log(Level.INFO, "cache hit, but file is too outdated. ({0} > {1}).", new Object[]{df.format(cachedUntil), df.format(new Date())});
+                }
+                else //valid cache entry!! YAY!!
+                {
+                    if(stream == null)
+                    {
+                        cacheHits++;
+                        stream = new FileInputStream(cacheFile);
+                    }
+                }
             }
         }
         if(stream == null) //no match... sad panda..
@@ -124,7 +132,7 @@ public class XMLApiResponseCache
                 {
                     throw new ControllerException("request on \""+postRequest.getURI()+"\" failed. (response code "+statusLine.getStatusCode()+" => )"+statusLine.getReasonPhrase());
                 }
-                entity = response.getEntity();
+                HttpEntity entity = response.getEntity();
                 //.. and put it into temporary cache file.
                 //we dont know the cached until date yet, so it has to be renamed later.
                 stream = entity.getContent();
@@ -151,7 +159,7 @@ public class XMLApiResponseCache
         XMLApiResponseReader reader = new XMLApiResponseReader(request.getXmlHandler());
         reader.read(stream);
         stream.close();
-
+        
         //after parsing the xml we know the cached until date and can finally
         //rename the temp file.
         if(tempFile != null)

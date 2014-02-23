@@ -20,22 +20,22 @@ public class EvESkillInTrainingInfo
 
     public Date getTrainingEndTime()
     {
-        return trainingEndTime;
+        return trainingEndTime == null ? null : new Date(trainingEndTime.getTime());
     }
 
     public void setTrainingEndTime(Date trainingEndTime)
     {
-        this.trainingEndTime = trainingEndTime;
+        this.trainingEndTime = new Date(trainingEndTime == null ? 0l : trainingEndTime.getTime());
     }
 
     public Date getTrainingStartTime()
     {
-        return trainingStartTime;
+        return trainingStartTime == null ? null : new Date(trainingStartTime.getTime());
     }
 
     public void setTrainingStartTime(Date trainingStartTime)
     {
-        this.trainingStartTime = trainingStartTime;
+        this.trainingStartTime = new Date(trainingStartTime == null ? 0l : trainingStartTime.getTime());
     }
 
     public int getTrainingTypeID()

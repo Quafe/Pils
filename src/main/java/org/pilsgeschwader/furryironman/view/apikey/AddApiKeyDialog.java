@@ -76,7 +76,7 @@ public class AddApiKeyDialog extends AbstractDialog implements Runnable
         buttonPanel.setEnabled(false);
         try
         {
-            ApiKey key = new ApiKey(Integer.valueOf(keyId.getText().trim()), vCodeField.getText());
+            ApiKey key = new ApiKey(Integer.parseInt(keyId.getText().trim()), vCodeField.getText());
             Controller controller = manager.getParentGUI().getController();
             controller.keyController.validate(key);
             if(!controller.getModel().addApiKey(key))

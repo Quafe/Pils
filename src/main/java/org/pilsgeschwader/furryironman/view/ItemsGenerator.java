@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import org.pilsgeschwader.furryironman.controller.common.Util;
 import org.pilsgeschwader.furryironman.model.eve.EvEItemDefinition;
 
 /**
@@ -32,10 +33,9 @@ public class ItemsGenerator
     private List<EvEItemDefinition> fetchItems() throws SQLException
     {
         List<EvEItemDefinition> definitions = new ArrayList<>();
-        try(Statement statement = connection.createStatement())
+        String query = "SELECT * FROM invtypes";
+        try(Statement statement = connection.createStatement(); ResultSet result = statement.executeQuery(query))
         {
-            String query = "SELECT * FROM invtypes";
-            ResultSet result = statement.executeQuery(query);
             while(result.next())
             {
                 fetchItem(definitions, result);
@@ -67,7 +67,7 @@ public class ItemsGenerator
     
     private void writeToFile(File file, List<EvEItemDefinition> definitions) throws IOException
     {
-        try(BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file))))
+        try(BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), Util.createDefaultFileCharset())))
         {
             for(EvEItemDefinition item : definitions)
             {

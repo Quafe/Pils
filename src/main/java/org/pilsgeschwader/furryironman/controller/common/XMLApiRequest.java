@@ -3,7 +3,6 @@ package org.pilsgeschwader.furryironman.controller.common;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -83,6 +82,8 @@ public class XMLApiRequest
     
     public enum Target
     {        
+        SKILL_IN_TRAINING("https://api.eveonline.com//char/SkillInTraining.xml.aspx", 131072, "skill in training", true),
+        
         ACCOUNT_STATUS("https://api.eveonline.com/account/AccountStatus.xml.aspx", 33554432, "account status", true),
     
         API_KEY_INFO("https://api.eveonline.com/account/APIKeyInfo.xml.aspx", 0, "api key info", false),
