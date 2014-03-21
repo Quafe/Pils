@@ -17,12 +17,36 @@ public class EvESkillInTrainingInfo
     private int trainingToLevel;
     
     private int skillInTraining;
+    
+    private Date currentTqTime;
 
+    private EvESkillDefinition skill;
+    
     public Date getTrainingEndTime()
     {
         return trainingEndTime == null ? null : new Date(trainingEndTime.getTime());
     }
 
+    public EvESkillDefinition getSkill()
+    {
+        return skill;
+    }
+
+    public void setSkill(EvESkillDefinition skill)
+    {
+        this.skill = skill;
+    }
+    
+    public Date getCurrentTqTime()
+    {
+        return currentTqTime;
+    }
+
+    public void setCurrentTqTime(Date currentTqTime)
+    {
+        this.currentTqTime = currentTqTime;
+    }
+    
     public void setTrainingEndTime(Date trainingEndTime)
     {
         this.trainingEndTime = new Date(trainingEndTime == null ? 0l : trainingEndTime.getTime());

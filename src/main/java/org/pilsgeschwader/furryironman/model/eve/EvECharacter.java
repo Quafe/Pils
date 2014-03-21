@@ -9,6 +9,8 @@ import java.util.List;
  */
 public class EvECharacter
 {
+    private EvESkillInTrainingInfo info;
+    
     private int characterID;
     
     private String characterName;
@@ -22,6 +24,17 @@ public class EvECharacter
     public EvECharacter()
     {
         keys = new ArrayList<>();
+        info = new EvESkillInTrainingInfo();
+    }
+
+    public EvESkillInTrainingInfo getInfo()
+    {
+        return info;
+    }
+
+    public void setInfo(EvESkillInTrainingInfo info)
+    {
+        this.info = info;
     }
 
     public List<ApiKey> getKeys()

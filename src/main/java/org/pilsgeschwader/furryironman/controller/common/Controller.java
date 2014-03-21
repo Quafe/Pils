@@ -20,6 +20,7 @@ import org.pilsgeschwader.furryironman.model.app.ApplicationConfig;
 import org.pilsgeschwader.furryironman.model.app.Model;
 import org.pilsgeschwader.furryironman.model.eve.EvECharacter;
 import org.pilsgeschwader.furryironman.model.eve.EvECharacterSheet;
+import org.pilsgeschwader.furryironman.model.eve.EvESkillInTrainingInfo;
 import org.xml.sax.SAXException;
 
 /**
@@ -145,6 +146,21 @@ public class Controller
     public void reloadCharacterList() throws URISyntaxException, IOException, ParserConfigurationException, SAXException, ControllerException, ParseException
     {
         model.setCharacters(characterController.loadAllCharacters(model.getStoredKeys()));
+    }
+    
+    public void reloadSkillInTraining() throws ControllerException, IOException, ParserConfigurationException, SAXException, ParseException
+    {
+        EvESkillInTrainingInfo info = null;
+        if(model != null && model.getCharacters() != null)
+        {
+            for(EvECharacter character : model.getCharacters())
+            {
+                info = characterController.getSkillInTrainingInfo(character);
+                info.setSkill(model.getSkilltree().getIdToSkill().get(info.getTrainingTypeID()));
+                character.setInfo(info);
+            }            
+        }
+        logger.info("done reloading all current skill target.");
     }
     
     public void shutDown()

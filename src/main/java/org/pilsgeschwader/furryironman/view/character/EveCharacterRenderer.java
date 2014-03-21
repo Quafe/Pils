@@ -15,6 +15,7 @@ import javax.swing.ListCellRenderer;
 import org.pilsgeschwader.furryironman.controller.common.Controller;
 import org.pilsgeschwader.furryironman.controller.common.ControllerException;
 import org.pilsgeschwader.furryironman.model.eve.EvECharacter;
+import org.pilsgeschwader.furryironman.model.eve.EvESkillDefinition;
 
 /**
  *
@@ -52,7 +53,11 @@ public class EveCharacterRenderer extends JPanel implements ListCellRenderer<EvE
     public Component getListCellRendererComponent(JList<? extends EvECharacter> list, EvECharacter character, int index, boolean isSelected, boolean cellHasFocus)
     {
         String text = "<html><b>"+character.getCharacterName()+"</b><br><i>"+character.getCorporationName()+"</i>";
-        
+        if(character.getInfo() != null)
+        {
+            EvESkillDefinition definition = character.getInfo().getSkill();
+            text += "<br>"+(definition == null ? "no skill" : definition.getTypeName());
+        }
         try
         {
             Image image = controller.characterImageController.fetchImageFor(character.getCharacterID(), DEFAULT_IMAGE_SIZE);

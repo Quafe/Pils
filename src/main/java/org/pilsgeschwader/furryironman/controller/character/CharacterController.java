@@ -17,10 +17,12 @@ import org.pilsgeschwader.furryironman.controller.common.ControllerException;
 import org.pilsgeschwader.furryironman.controller.common.InvalidApiKeyException;
 import org.pilsgeschwader.furryironman.controller.common.XMLApiRequest;
 import org.pilsgeschwader.furryironman.controller.common.XMLApiResponseCache;
+import org.pilsgeschwader.furryironman.controller.skills.SkillInTrainingHandler;
 import org.pilsgeschwader.furryironman.model.eve.EvECharacter;
 import org.pilsgeschwader.furryironman.model.eve.EvECharacterStatus;
 import org.pilsgeschwader.furryironman.model.eve.ApiKey;
 import org.pilsgeschwader.furryironman.model.eve.EvECharacterSheet;
+import org.pilsgeschwader.furryironman.model.eve.EvESkillInTrainingInfo;
 import org.xml.sax.SAXException;
 
 /**
@@ -38,6 +40,17 @@ public class CharacterController extends XMLApiResponseCache
     {
         super(baseDir);
 //        charactersheetCache = new XMLApiResponseCache(new File("./cache/charactersheets/"));
+    }
+    
+    public EvESkillInTrainingInfo getSkillInTrainingInfo(EvECharacter character) throws ControllerException, IOException, ParserConfigurationException, SAXException, ParseException
+    {
+        XMLApiRequest request = new XMLApiRequest(XMLApiRequest.Target.SKILL_IN_TRAINING);
+        SkillInTrainingHandler handler = new SkillInTrainingHandler();
+        request.setXmlHandler(handler);
+        request.getArguments().put("characterID", String.valueOf(character.getCharacterID()));
+//        request.getArguments().put("characterIDcache", "60");
+        makeApiXMLRequest(request, character.getKeys());
+        return handler.getResult();
     }
     
     public EvECharacterStatus getCharacterStatus(EvECharacter character) throws URISyntaxException, IOException, ParserConfigurationException, SAXException, ControllerException, ParseException

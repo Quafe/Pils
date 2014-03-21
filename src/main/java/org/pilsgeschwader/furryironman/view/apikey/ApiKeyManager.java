@@ -9,6 +9,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
+import javax.swing.SwingUtilities;
 import org.pilsgeschwader.furryironman.model.eve.ApiKey;
 import org.pilsgeschwader.furryironman.view.FurryIronman;
 import org.pilsgeschwader.furryironman.view.common.AbstractDialog;
@@ -80,9 +81,18 @@ public class ApiKeyManager extends AbstractDialog
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                addDialog.setLocationRelativeTo(ApiKeyManager.this);
-                addDialog.clearFields();
-                addDialog.setVisible(true);
+                SwingUtilities.invokeLater(new Runnable()
+                {
+
+                    @Override
+                    public void run()
+                    {
+                        addDialog.setLocationRelativeTo(ApiKeyManager.this);
+                        addDialog.clearFields();
+                        addDialog.setVisible(true);
+                    }
+                });
+                
                 reloadList();
             }
         });

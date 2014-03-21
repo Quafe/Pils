@@ -67,12 +67,15 @@ public class FurryIronman extends JFrame implements Runnable
     
     private ButtonPanel buttonPanel;
     
+    private final RenderThread renderThread;
+    
     private FurryIronman() throws URISyntaxException
     {
         super("EveCombatMapper");
         setIconImage(IconCache.getIcon(IconNames.ICON).getImage());
         controller = new Controller();
         apiKeyManager = new ApiKeyManager(this);
+        renderThread = new RenderThread();
     }
     
     public Controller getController()
@@ -85,6 +88,7 @@ public class FurryIronman extends JFrame implements Runnable
         int result = JOptionPane.showConfirmDialog(this, "do you really want to quit?", "quit?", JOptionPane.YES_NO_OPTION);
         if(result == JOptionPane.YES_OPTION)
         {
+            renderThread.stop();
             controller.shutDown();
             threadPool.shutdown();
             dispose();            
@@ -325,6 +329,10 @@ public class FurryIronman extends JFrame implements Runnable
             logger.info("done reloading all characters.");
             progressBar.setString("done reloading all characters.");
             
+            controller.reloadSkillInTraining();
+            logger.info("done reloading skills in training infos.");
+            progressBar.setString("done reloading skills in training infos.");
+            
             controller.reloadAllCharacterImages();
             logger.info("done reloading all characters images.");
             progressBar.setString("done reloading all characters images.");
@@ -332,7 +340,9 @@ public class FurryIronman extends JFrame implements Runnable
             controller.reloadAllEveCorporationImages();
             logger.info("done reloading all corp images.");
             progressBar.setString("done reloading all corp images.");
-            
+                        
+            threadPool.submit(renderThread);
+            logger.info("render thread started...");
             
             
         }
@@ -346,5 +356,38 @@ public class FurryIronman extends JFrame implements Runnable
             progressBar.setIndeterminate(false);
             buttonPanel.setEnabled(true);
         }
+    }
+    
+    class RenderThread implements Runnable
+    {
+        private boolean runflag;
+        
+        public RenderThread()
+        {
+            runflag = true;
+        }
+        
+        public void stop()
+        {
+            runflag = false;
+        }
+        
+        @Override
+        public void run()
+        {
+            try
+            {
+                while(!Thread.currentThread().isInterrupted() && runflag)
+                {
+                    allCharactersList.repaint();
+                    Thread.sleep(1000l);
+                }
+            }
+            catch(InterruptedException ex)
+            {
+                logger.severe("error executing render thread. thread got shut down...");
+                ex.printStackTrace(System.err);
+            }
+        }        
     }
 }

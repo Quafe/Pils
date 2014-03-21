@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.DefaultListCellRenderer;
@@ -47,6 +48,11 @@ public class SaveCharacterImageDialog extends AbstractDialog implements ActionLi
         imageSizeSelect = new JComboBox<>(new Integer[]{30, 32, 64, 128, 200, 256, 512, 1024});
         
         List<EvECharacter> chars = parentGUI.getController().getModel().getCharacters();
+        //prevent npe when opening the dialog the first time.
+        if(chars == null)
+        {
+            chars = new ArrayList<>(0);
+        }
         characterList = new JComboBox<>(chars.toArray(new EvECharacter[chars.size()]));
         characterList.setRenderer(new CharacterListRenderer());
         
@@ -78,6 +84,7 @@ public class SaveCharacterImageDialog extends AbstractDialog implements ActionLi
     {
         try
         {
+            buttonPanel.setEnabled(false);
             startProgressBar("fetching char image from server...");
             int width = ((Number) imageSizeSelect.getSelectedItem()).intValue();
             EvECharacter character = (EvECharacter) characterList.getSelectedItem();
@@ -117,6 +124,7 @@ public class SaveCharacterImageDialog extends AbstractDialog implements ActionLi
         finally
         {
             stopProgressBar(null);
+            buttonPanel.setEnabled(true);
         }
     }
     
@@ -131,8 +139,5 @@ public class SaveCharacterImageDialog extends AbstractDialog implements ActionLi
             setText(character.getCharacterName());
             return this;
         }
-        
-       
-        
     }
 }
