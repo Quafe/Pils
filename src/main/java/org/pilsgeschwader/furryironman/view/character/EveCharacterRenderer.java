@@ -4,6 +4,12 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Image;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
@@ -16,6 +22,8 @@ import org.pilsgeschwader.furryironman.controller.common.Controller;
 import org.pilsgeschwader.furryironman.controller.common.ControllerException;
 import org.pilsgeschwader.furryironman.model.eve.EvECharacter;
 import org.pilsgeschwader.furryironman.model.eve.EvESkillDefinition;
+import org.pilsgeschwader.furryironman.model.eve.EvESkillInTrainingInfo;
+import org.pilsgeschwader.furryironman.view.common.Util;
 
 /**
  *
@@ -35,6 +43,10 @@ public class EveCharacterRenderer extends JPanel implements ListCellRenderer<EvE
     
     public static final int DEFAULT_IMAGE_SIZE = 64;
     
+    private final NumberFormat numberFormat;
+    
+    private final DateFormat durationFormat;
+    
     public EveCharacterRenderer(Controller controller)
     {
         super(new BorderLayout());
@@ -47,16 +59,39 @@ public class EveCharacterRenderer extends JPanel implements ListCellRenderer<EvE
         add(leftImageIcon, BorderLayout.WEST);
         add(rightImageIcon, BorderLayout.EAST);
         add(textLabel, BorderLayout.CENTER);
+        numberFormat = Util.getNiceNumberFormat();
+        durationFormat = new SimpleDateFormat("D'd' h'h' m'm' s's'");
+        durationFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
     }
 
     @Override
     public Component getListCellRendererComponent(JList<? extends EvECharacter> list, EvECharacter character, int index, boolean isSelected, boolean cellHasFocus)
     {
         String text = "<html><b>"+character.getCharacterName()+"</b><br><i>"+character.getCorporationName()+"</i>";
-        if(character.getInfo() != null)
+        EvESkillInTrainingInfo info = character.getInfo();
+        if(info != null)
         {
-            EvESkillDefinition definition = character.getInfo().getSkill();
-            text += "<br>"+(definition == null ? "no skill" : definition.getTypeName());
+            text += "<br>";
+            EvESkillDefinition definition = info.getSkill();
+            if(definition == null)
+            {
+                text += "no skill";
+            }
+            else
+            {
+                
+                long skillpoints = info.getTrainingDestinationSP() - info.getTrainingStartSP();
+                Date refDate = new Date();
+                long duration =  (info.getTrainingEndTime().getTime() - info.getTrainingStartTime().getTime());
+                long elapsedTime = (refDate.getTime() - info.getTrainingStartTime().getTime());
+                double ratio = (double) elapsedTime / (double) duration;
+                long totalSkillPoints = (long) (info.getTrainingStartSP() + skillpoints * ratio);
+                
+                
+                
+                text += definition.getTypeName()+" ("+numberFormat.format(totalSkillPoints)+"/"+numberFormat.format(info.getTrainingDestinationSP())+")";
+                text +=  " "+durationFormat.format(info.getTrainingEndTime().getTime() - (refDate.getTime()));
+            }            
         }
         try
         {
@@ -79,7 +114,6 @@ public class EveCharacterRenderer extends JPanel implements ListCellRenderer<EvE
         }
         
         textLabel.setText(text);
-        
         if (isSelected) 
         {
             setBackground(list.getSelectionBackground());

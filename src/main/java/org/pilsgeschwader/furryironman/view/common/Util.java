@@ -15,6 +15,16 @@ import org.pilsgeschwader.furryironman.model.eve.EvESkillBonus;
 public class Util 
 {
     
+    public static NumberFormat getNiceNumberFormat()
+    {
+        DecimalFormat format = (DecimalFormat) NumberFormat.getCurrencyInstance();
+        DecimalFormatSymbols symbols = format.getDecimalFormatSymbols();
+        symbols.setCurrencySymbol("");
+        format.setDecimalFormatSymbols(symbols);
+        format.setMaximumFractionDigits(0);
+        return format;
+    }
+    
     public static NumberFormat getIskNumberFormatter()
     {
         DecimalFormat format = (DecimalFormat) NumberFormat.getCurrencyInstance();

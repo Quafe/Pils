@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Stack;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.pilsgeschwader.furryironman.controller.common.Util;
 import org.pilsgeschwader.furryironman.controller.common.XMLApiResponseHandler;
 import org.pilsgeschwader.furryironman.model.eve.EvESkillInTrainingInfo;
 
@@ -26,7 +27,8 @@ public class SkillInTrainingHandler implements XMLApiResponseHandler
     public SkillInTrainingHandler()
     {
         result = new EvESkillInTrainingInfo();
-        dateformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        dateformat = Util.createDefaultEVEFormat();
+//        dateformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     }
     
     @Override

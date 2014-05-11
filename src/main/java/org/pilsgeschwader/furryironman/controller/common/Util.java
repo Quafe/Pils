@@ -1,7 +1,10 @@
 package org.pilsgeschwader.furryironman.controller.common;
 
 import java.nio.charset.Charset;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Map;
+import java.util.TimeZone;
 
 /**
  *
@@ -9,6 +12,13 @@ import java.util.Map;
  */
 public class Util 
 {
+    
+    public static DateFormat createDefaultEVEFormat()
+    {
+        SimpleDateFormat format =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        format.setTimeZone(TimeZone.getTimeZone("GMT"));
+        return format;
+    }
     
     public static Charset createDefaultFileCharset()
     {

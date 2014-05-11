@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.Locale;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Level;
@@ -273,6 +274,7 @@ public class FurryIronman extends JFrame implements Runnable
                 {
                     try
                     {
+//                        Locale.setDefault(Locale.GERMAN);
 //                        UIManager.setLookAndFeel(new SubstanceBusinessBlackSteelLookAndFeel());
 //                        UIManager.setLookAndFeel(new SubstanceGraphiteLookAndFeel());
 //                        UIManager.setLookAndFeel(new SubstanceTwilightLookAndFeel());

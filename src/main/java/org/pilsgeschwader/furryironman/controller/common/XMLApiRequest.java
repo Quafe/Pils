@@ -81,8 +81,12 @@ public class XMLApiRequest
     }
     
     public enum Target
-    {        
-        SKILL_IN_TRAINING("https://api.eveonline.com//char/SkillInTraining.xml.aspx", 131072, "skill in training", true),
+    {    
+        REFTYPES("https://api.eveonline.com//eve/RefTypes.xml.aspx", 0, "ref types", false),
+        
+        WALLET_JOURNAL("https://api.eveonline.com/char/WalletJournal.xml.aspx", 2097152, "wallet journal", true),
+        
+        SKILL_IN_TRAINING("https://api.eveonline.com/char/SkillInTraining.xml.aspx", 131072, "skill in training", true),
         
         ACCOUNT_STATUS("https://api.eveonline.com/account/AccountStatus.xml.aspx", 33554432, "account status", true),
     

@@ -14,8 +14,10 @@ import java.text.ParseException;
 import java.util.logging.Logger;
 import javax.xml.parsers.ParserConfigurationException;
 import org.pilsgeschwader.furryironman.controller.character.CharacterController;
+import org.pilsgeschwader.furryironman.controller.evewho.EveWhoController;
 import org.pilsgeschwader.furryironman.controller.skills.SkillTreeImporter;
 import org.pilsgeschwader.furryironman.controller.solarsystem.SolarSystemController;
+import org.pilsgeschwader.furryironman.controller.trade.JournalController;
 import org.pilsgeschwader.furryironman.model.app.ApplicationConfig;
 import org.pilsgeschwader.furryironman.model.app.Model;
 import org.pilsgeschwader.furryironman.model.eve.EvECharacter;
@@ -41,6 +43,10 @@ public class Controller
     
     public final ItemDefinitionController itemDefinitionController;
     
+    public final JournalController journalController;
+    
+    public final EveWhoController eveWhoController;
+    
     private final Model model;
     
     private static final Logger logger = Logger.getLogger(Controller.class.getName());
@@ -63,8 +69,10 @@ public class Controller
         solarSystemController = new SolarSystemController();
         characterController = new CharacterController(xmlCacheDir);
         itemDefinitionController = new ItemDefinitionController();
+        journalController = new JournalController(xmlCacheDir);
         characterImageController = new AbstractImageController(new File("./images/character"), new URI("http://image.eveonline.com/Character/"), AbstractImageController.IMAGE_TYPE_JPEG);        
         corpImageController = new AbstractImageController(new File("./images/corp"), new URI("http://image.eveonline.com/Corporation/"), AbstractImageController.IMAGE_TYPE_PNG);
+        eveWhoController = new EveWhoController();
     }
 
     public Model getModel()
